@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using MySql.Data.MySqlClient;
 
 namespace Modulo_5.Controllers
 {
+
     public class UrgenciasController : Controller
     {
+        private IConfiguration Configuration;
         // GET: UrgenciasFormularioController1
         public ActionResult Index()
         {
@@ -21,9 +26,11 @@ namespace Modulo_5.Controllers
             return View();
         }
 
-        // GET: UrgenciasFormularioController1/Create
+        [HttpPost]
         public ActionResult Create()
         {
+            using var connection = new MySqlConnection(this.Configuration.GetConnectionString("Default"));
+            connection.Open();
             return View();
         }
 
