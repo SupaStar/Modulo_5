@@ -3,10 +3,11 @@
 *@
 @{
 }
-    <div class="container">
-        <h1>Registrar urgencia</h1>
+<div class="container">
+    <h1>Registrar urgencia</h1>
+    <form>
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-lg-5">
                 <label for="nombre">Nombre del pacinete:*</label>
             </div>
             <div class="col">
@@ -14,7 +15,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-lg-5">
                 <label for="fechNac">Fecha de nacimiento:*</label>
             </div>
             <div class="col">
@@ -22,7 +23,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-lg-5">
                 <label for="email">Correo electronico:*</label>
             </div>
             <div class="col">
@@ -30,7 +31,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-lg-5">
                 <label for="area">Area de urgencia:*</label>
             </div>
             <div class="col">
@@ -38,7 +39,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-lg-5">
                 <label for="tel">Telefono de contacto:*</label>
             </div>
             <div class="col">
@@ -46,7 +47,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-lg-5">
                 <label for="telF">Telefono familiar (opcional):</label>
             </div>
             <div class="col">
@@ -54,7 +55,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-lg-5">
                 <label for="nss">Numero de seguridad social:*</label>
             </div>
             <div class="col">
@@ -62,11 +63,20 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-3">
-                <label for="nss">Descripcion de los malestares:*</label>
+            <div class="col-lg-5">
+                <label for="malestares">Descripcion de los malestares:*</label>
             </div>
-            <div class="col">
-                <input id="nss" name="nss" type="number" alt="123456789">
+            <div class="col-lg-7">
+                <textarea id="malestares" name="malestares" type="text"></textarea>
             </div>
         </div>
-    </div>
+        <div class="row justify-content-md-center">
+            <div class="col col-2">
+                <button class="btn btn-primary btn-lg" type="button">Enviar.</button>
+            </div>
+            <div class="col col-2">
+                <button class="btn btn-danger btn-lg" type="reset">Cancelar.</button>
+            </div>
+        </div>
+    </form>
+</div>
