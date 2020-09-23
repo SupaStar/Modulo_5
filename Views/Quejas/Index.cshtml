@@ -3,3 +3,52 @@
 *@
 @{
 }
+
+    <form>
+        <h1>Formulario Quejas</h1>
+        <br />
+        <!-- Cita  -->
+        <div class="form-group row">
+            <label for="inputCita" class="col-sm-2 col-form-label">Cita N°:* </label>
+            <div class="col-2">
+                <input type="text" class="form-control" placeholder="N° de Cita">
+            </div>
+        </div>
+        <!-- E-mail  -->
+        <div class="form-group row">
+            <label for="inputEmail" class="col-sm-2 col-form-label">Correo Electrónico:* </label>
+            <div class="col-sm-6">
+                <input id="correo" name="correo" type="text" alt="correo" class="form-control" placeholder="Ejemplo@gmail.com">
+            </div>
+        </div>
+        <!-- Queja  -->
+        <div class="form-group row">
+            <label for="inputQueja" class="col-sm-2 col-form-label">Tipo de Queja:*</label>
+            <div class="col-sm-3">
+                <select class="form-control">
+                    <option selected>-Ninguna-</option>
+                    <option value="1">Mal Servicio</option>
+                    <option value="2">Error en la informacion</option>
+                    <option value="3">Falla del sistema</option>
+                </select>
+            </div>
+        </div>
+        <!-- Reclamacion  -->
+        <div class="form-group row">
+            <label for="inputReclamacion" class="col-sm-2 col-form-label">Descripcion de la reclamacion:* </label>
+            <div class="col-sm-6">
+                <textarea class="form-control" id="descripcion" rows="5" placeholder="Comentarios..."></textarea>
+            </div>
+        </div>
+        <!-- Botones  -->
+        <div class="form-group row">
+            <div class="col-3">
+            </div>
+            <div class="col-2">
+                <button type="button" class="btn btn-success">Confirmar</button>
+            </div>
+            <div class="col">
+                <button type="button" class="btn btn-danger">Cancelar</button>
+            </div>
+        </div>
+    </form>
