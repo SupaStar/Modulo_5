@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Modulo_5.Models
 {
-    public class UrgenciaModel : DbContext
+    public class UrgenciaModel
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
@@ -17,5 +17,6 @@ namespace Modulo_5.Models
         public int TelefonoF { get; set; }
         public int Nss { get; set; }
         public string Descripcion { get; set; }
+        public int Estado { get; set; }
     }
 }

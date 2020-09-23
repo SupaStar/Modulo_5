@@ -2,24 +2,28 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    DateTime dt = DateTime.Now;
+    String fechaMin = dt.ToString("yyyy-MM-dd");
+    dt=dt.AddDays(7);
+    String fechaMax = dt.ToString("yyyy-MM-dd");
 }
 <div class="container">
     <h1>Registrar urgencia</h1>
-    <form>
+    <form method="post">
         <div class="row">
             <div class="col-lg-5">
                 <label for="nombre">Nombre del pacinete:*</label>
             </div>
             <div class="col">
-                <input id="nombre" name="nombre" type="text" alt="Nombre" placeholder="Pepe Problemas">
+                <input id="nombre" name="nombre" type="text" alt="Nombre" placeholder="Pepe Problemas" required>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-5">
-                <label for="fechNac">Fecha de nacimiento:*</label>
+                <label for="FechaNac">Fecha de nacimiento:*</label>
             </div>
             <div class="col">
-                <input id="fechNac" name="fechNac" type="date" alt="Fecha de nacimiento">
+                <input id="FechaNac" name="FechaNac" type="date" min="@fechaMin" max="@fechaMax" alt="Fecha de nacimiento" required>
             </div>
         </div>
         <div class="row">
@@ -27,31 +31,33 @@
                 <label for="email">Correo electronico:*</label>
             </div>
             <div class="col">
-                <input id="email" name="email" type="email" alt="name@example.com">
+                <input id="email" name="email" type="email" alt="name@example.com" required>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-5">
-                <label for="area">Area de urgencia:*</label>
+                <label for="IdArea">Area de urgencia:*</label>
             </div>
             <div class="col">
-                <select id="area" name="area"></select>
+                <select id="IdArea" name="IdArea" required>
+                    <option value="1">Determinado</option>
+                </select>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-5">
-                <label for="tel">Telefono de contacto:*</label>
+                <label for="Telefono">Telefono de contacto:*</label>
             </div>
             <div class="col">
-                <input id="tel" name="tel" type="tel" alt="123456789">
+                <input id="Telefono" name="Telefono" type="tel" alt="123456789" required>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-5">
-                <label for="telF">Telefono familiar (opcional):</label>
+                <label for="TelefonoF">Telefono familiar (opcional):</label>
             </div>
             <div class="col">
-                <input id="telF" name="telF" type="tel" alt="123456789">
+                <input id="TelefonoF" name="TelefonoF" type="tel" alt="123456789">
             </div>
         </div>
         <div class="row">
@@ -59,20 +65,20 @@
                 <label for="nss">Numero de seguridad social:*</label>
             </div>
             <div class="col">
-                <input id="nss" name="nss" type="number" alt="123456789">
+                <input id="nss" name="nss" type="number" alt="123456789" required>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-5">
-                <label for="malestares">Descripcion de los malestares:*</label>
+                <label for="Descripcion">Descripcion de los malestares:*</label>
             </div>
             <div class="col-lg-7">
-                <textarea id="malestares" name="malestares" type="text"></textarea>
+                <textarea id="Descripcion" name="Descripcion" type="text" required></textarea>
             </div>
         </div>
         <div class="row justify-content-md-center">
             <div class="col col-2">
-                <button class="btn btn-primary btn-lg" type="button">Enviar.</button>
+                <button class="btn btn-primary btn-lg" asp-controller="Urgencias" asp-action="Create">Enviar.</button>
             </div>
             <div class="col col-2">
                 <button class="btn btn-danger btn-lg" type="reset">Cancelar.</button>
