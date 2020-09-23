@@ -41,9 +41,16 @@ namespace Modulo_5.Services
             return urgenciaItem;
         }
 
-        public UrgenciaModel DeleteUrgencia(int id)
+        public Boolean DeleteUrgencia(int id)
         {
-            throw new NotImplementedException();
+            MySqlConnection conn = conexion.conectar();
+            string sql = "UPDATE URGENCIAS SET estado=1 WHERE id=@p1";
+            MySqlCommand m = conn.CreateCommand();
+            m.CommandText = sql;
+            m.Parameters.AddWithValue("@p1", id);
+            m.ExecuteNonQuery();
+            Boolean estado = true;
+            return estado;
         }
 
         public UrgenciaModel FindUrgencia(int id)
@@ -74,7 +81,7 @@ namespace Modulo_5.Services
         public List<UrgenciaModel> GetUrgencias()
         {
             MySqlConnection conn = conexion.conectar();
-            string sql = "SELECT * FROM URGENCIAS WHERE estado=0";
+            string sql = "SELECT * FROM URGENCIAS WHERE estado=0 AND atendido=0";
             MySqlCommand m = conn.CreateCommand();
             m.CommandText = sql;
             MySqlDataReader result = m.ExecuteReader();
@@ -96,9 +103,24 @@ namespace Modulo_5.Services
             return _urgenciasItems;
         }
 
-        public UrgenciaModel UpdateUrgencia(string id, UrgenciaModel urgenciaItem)
+        public UrgenciaModel UpdateUrgencia(int id, UrgenciaModel urgenciaItem)
         {
-            throw new NotImplementedException();
+            MySqlConnection conn = conexion.conectar();
+            string sqlInsert = "UPDATEurgencias SET nombre=@p1,fecha_nac=@p2,email=@p3,idArea=@p4,telefono=@p5,telefonoF=@p6,nss=@p7,descripcion=@p8 WHERE id=@p9";
+            MySqlCommand m = conn.CreateCommand();
+            m.CommandText = sqlInsert;
+            m.Parameters.AddWithValue("@p1", urgenciaItem.Nombre);
+            m.Parameters.AddWithValue("@p2", urgenciaItem.FechaNac);
+            m.Parameters.AddWithValue("@p3", urgenciaItem.Email);
+            m.Parameters.AddWithValue("@p4", urgenciaItem.IdArea);
+            m.Parameters.AddWithValue("@p5", urgenciaItem.Telefono);
+            m.Parameters.AddWithValue("@p6", urgenciaItem.TelefonoF);
+            m.Parameters.AddWithValue("@p7", urgenciaItem.Nss);
+            m.Parameters.AddWithValue("@p8", urgenciaItem.Descripcion);
+            m.Parameters.AddWithValue("@p9", id);
+            m.ExecuteNonQuery();
+            conn.Close();
+            return urgenciaItem;
         }
     }
 }

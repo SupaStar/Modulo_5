@@ -12,9 +12,9 @@ namespace Modulo_5.Services.Interfaces
 
         public UrgenciaModel AddUrgencia(UrgenciaModel urgenciaItem);
 
-        public UrgenciaModel UpdateUrgencia(string id, UrgenciaModel urgenciaItem);
+        public UrgenciaModel UpdateUrgencia(int id, UrgenciaModel urgenciaItem);
 
-        public UrgenciaModel DeleteUrgencia(int id);
+        public Boolean DeleteUrgencia(int id);
         public UrgenciaModel FindUrgencia(int id);
     }
 }
