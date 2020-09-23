@@ -29,8 +29,12 @@ namespace Modulo_5.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(UrgenciaModel u)
         {
-            _service.AddUrgencia(u);
-            return RedirectToAction("Index", "Home");
+            if (ModelState.IsValid)
+            {
+                _service.AddUrgencia(u);
+                return RedirectToAction("Index", "Home");
+            }
+            return View("Index");
         }
         public ActionResult Administrador()
         {

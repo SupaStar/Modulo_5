@@ -4,85 +4,99 @@
 @{
     DateTime dt = DateTime.Now;
     String fechaMin = dt.ToString("yyyy-MM-dd");
-    dt=dt.AddDays(7);
+    dt = dt.AddDays(7);
     String fechaMax = dt.ToString("yyyy-MM-dd");
 }
-<div class="container">
-    <h1>Registrar urgencia</h1>
-    <form method="post">
-        <div class="row">
-            <div class="col-lg-5">
-                <label for="nombre">Nombre del pacinete:*</label>
-            </div>
-            <div class="col">
-                <input id="nombre" name="nombre" type="text" alt="Nombre" placeholder="Pepe Problemas" required>
-            </div>
+@model UrgenciaModel
+@using (Html.BeginForm("Create", "Urgencias", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-lg-5">
+            @Html.LabelFor(x => x.Nombre, new { @class = "col-form-label" })
         </div>
-        <div class="row">
-            <div class="col-lg-5">
-                <label for="FechaNac">Fecha de nacimiento:*</label>
-            </div>
-            <div class="col">
-                <input id="FechaNac" name="FechaNac" type="date" min="@fechaMin" max="@fechaMax" alt="Fecha de nacimiento" required>
-            </div>
+        <div class="col">
+            @Html.TextBoxFor(x => x.Nombre,
+           new { @class = "form-control", placeholder = "Nombre.", autofocus = "autofocus" })
+            @Html.ValidationMessageFor(x => x.Nombre, null, new { @class = "text-danger" })
         </div>
-        <div class="row">
-            <div class="col-lg-5">
-                <label for="email">Correo electronico:*</label>
-            </div>
-            <div class="col">
-                <input id="email" name="email" type="email" alt="name@example.com" required>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-5">
+            @Html.LabelFor(x => x.FechaNac, new { @class = "col-form-label" })
         </div>
-        <div class="row">
-            <div class="col-lg-5">
-                <label for="IdArea">Area de urgencia:*</label>
-            </div>
-            <div class="col">
-                <select id="IdArea" name="IdArea" required>
-                    <option value="1">Determinado</option>
-                </select>
-            </div>
+        <div class="col">
+            @Html.TextBoxFor(x => x.FechaNac,
+           new { @class = "form-control", type = "date", placeholder = "Fecha de nacimiento." })
+            @Html.ValidationMessageFor(x => x.FechaNac, null, new { @class = "text-danger" })
         </div>
-        <div class="row">
-            <div class="col-lg-5">
-                <label for="Telefono">Telefono de contacto:*</label>
-            </div>
-            <div class="col">
-                <input id="Telefono" name="Telefono" type="tel" alt="123456789" required>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-5">
+            @Html.LabelFor(x => x.Email, new { @class = "col-form-label" })
         </div>
-        <div class="row">
-            <div class="col-lg-5">
-                <label for="TelefonoF">Telefono familiar (opcional):</label>
-            </div>
-            <div class="col">
-                <input id="TelefonoF" name="TelefonoF" type="tel" alt="123456789">
-            </div>
+        <div class="col">
+            @Html.TextBoxFor(x => x.Email,
+           new { @class = "form-control", type = "text", placeholder = "name@example.com." })
+            @Html.ValidationMessageFor(x => x.Email, null, new { @class = "text-danger" })
         </div>
-        <div class="row">
-            <div class="col-lg-5">
-                <label for="nss">Numero de seguridad social:*</label>
-            </div>
-            <div class="col">
-                <input id="nss" name="nss" type="number" alt="123456789" required>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-5">
+            @Html.LabelFor(x => x.IdArea, new { @class = "col-form-label" })
         </div>
-        <div class="row">
-            <div class="col-lg-5">
-                <label for="Descripcion">Descripcion de los malestares:*</label>
-            </div>
-            <div class="col-lg-7">
-                <textarea id="Descripcion" name="Descripcion" type="text" required></textarea>
-            </div>
+        <div class="col">
+            <select id="IdArea" name="IdArea" class="form-control" required>
+                <option value="1">Determinado</option>
+            </select>
         </div>
-        <div class="row justify-content-md-center">
-            <div class="col col-2">
-                <button class="btn btn-primary btn-lg" asp-controller="Urgencias" asp-action="Create">Enviar.</button>
-            </div>
-            <div class="col col-2">
-                <button class="btn btn-danger btn-lg" type="reset">Cancelar.</button>
-            </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-5">
+            @Html.LabelFor(x => x.Telefono, new { @class = "col-form-label" })
         </div>
-    </form>
-</div>
+        <div class="col">
+            @Html.TextBoxFor(x => x.Telefono,
+           new { @class = "form-control", type = "number", placeholder = "123456789" })
+            @Html.ValidationMessageFor(x => x.Telefono, null, new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-5">
+            @Html.LabelFor(x => x.TelefonoF, new { @class = "col-form-label" })
+        </div>
+        <div class="col">
+            @Html.TextBoxFor(x => x.TelefonoF,
+           new { @class = "form-control", type = "number", placeholder = "123456789" })
+            @Html.ValidationMessageFor(x => x.TelefonoF, null, new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-5">
+            @Html.LabelFor(x => x.Nss, new { @class = "col-form-label" })
+        </div>
+        <div class="col">
+            @Html.TextBoxFor(x => x.Nss,
+           new { @class = "form-control", type = "number", placeholder = "123456789" })
+            @Html.ValidationMessageFor(x => x.Nss, null, new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-5">
+            @Html.LabelFor(x => x.Descripcion, new { @class = "col-form-label" })
+        </div>
+        <div class="col">
+            @Html.TextAreaFor(x => x.Descripcion,
+           new { @class = "form-control", placeholder = "Descripcion-" })
+            @Html.ValidationMessageFor(x => x.Descripcion, null, new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col col-2">
+            <button class="btn btn-primary btn-lg">Enviar.</button>
+        </div>
+        <div class="col col-2">
+            <button class="btn btn-danger btn-lg" type="reset">Cancelar.</button>
+        </div>
+    </div>
+}

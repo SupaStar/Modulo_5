@@ -31,7 +31,7 @@ namespace Modulo_5
             services.AddSession(options =>
             {
                 options.Cookie.Name = ".Administrador.Session";
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.IdleTimeout = TimeSpan.FromSeconds(50);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
