@@ -1,94 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using MySql.Data.MySqlClient;
+using Microsoft.Extensions.Logging;
+using Modulo_5.Models;
+using Modulo_5.Services;
 
 namespace Modulo_5.Controllers
 {
-
     public class UrgenciasController : Controller
     {
-        private IConfiguration Configuration;
-        // GET: UrgenciasFormularioController1
-        public ActionResult Index()
+        private ILogger _logger;
+        private UrgenciasService _service;
+        public UrgenciasController(ILogger<UrgenciasController> logger, IConfiguration conf)
+        {
+            _logger = logger;
+            _service = new UrgenciasService(conf);
+        }
+
+        public IActionResult Index()
         {
             return View();
         }
 
-        // GET: UrgenciasFormularioController1/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Create()
-        {
-            using var connection = new MySqlConnection(this.Configuration.GetConnectionString("Default"));
-            connection.Open();
-            return View();
-        }
-
-        // POST: UrgenciasFormularioController1/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(UrgenciaModel u)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                _service.AddUrgencia(u);
+                return RedirectToAction("Index", "Home");
             }
-            catch
-            {
-                return View();
-            }
+            return View("Index");
         }
-
-        // GET: UrgenciasFormularioController1/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Administrador()
         {
+            ViewBag.urgencias = _service.GetUrgencias();
             return View();
         }
-
-        // POST: UrgenciasFormularioController1/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Editar(int id)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: UrgenciasFormularioController1/Delete/5
-        public ActionResult Delete(int id)
-        {
+            ViewBag.urgencia = _service.FindUrgencia(id);
             return View();
         }
-
-        // POST: UrgenciasFormularioController1/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Update(UrgenciaModel u)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            
+            return View();
         }
     }
 }

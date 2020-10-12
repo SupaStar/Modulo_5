@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Modulo_5.Services;
+using Modulo_5.Services.Interfaces;
 using MySql.Data.MySqlClient;
 
 namespace Modulo_5
@@ -24,8 +26,19 @@ namespace Modulo_5
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                options.Cookie.Name = ".Administrador.Session";
+                options.IdleTimeout = TimeSpan.FromSeconds(50);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
             services.AddControllersWithViews();
             services.AddTransient<MySqlConnection>(_ => new MySqlConnection(Configuration["ConnectionStrings:Default"]));
+            services.AddSingleton<IUrgencia, UrgenciasService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,6 +61,8 @@ namespace Modulo_5
 
             app.UseAuthorization();
 
+            app.UseSession();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -59,6 +74,9 @@ namespace Modulo_5
                 endpoints.MapControllerRoute(
                     name: "quejas",
                     pattern: "{controller=Quejas}/{action=Index}/{id?}");
+                endpoints.MapControllerRoute(
+                    name: "editarUrgencia",
+                    pattern: "{controller=Urgencias}/{action=Editar}/{id?}");
             });
         }
     }

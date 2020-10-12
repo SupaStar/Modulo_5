@@ -12,7 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
+<<<<<<< HEAD
     <Folder Include="wwwroot\images\" />
+=======
+    <Folder Include="Views\Urgencias\Modales\" />
+>>>>>>> 5040f289291caefa4289780835e1ff9ada03952e
   </ItemGroup>
 
 </Project>
