@@ -1,8 +1,9 @@
-﻿<div>
-    @{
-        ViewData["Title"] = "Home Page";
-    }
-    <header class="masthead">
+﻿@{
+    Layout = "~/Views/Shared/More_Layout/_WithoutC.cshtml";
+    ViewData["Title"] = "Home Page";
+}
+<div>
+    <section class="masthead">
         <div class="row">
             <div class="col-md-10 col-lg-8 mx-auto">
                 <div class="textositio">
@@ -10,7 +11,7 @@
                 </div>
             </div>
         </div>
-    </header>
+    </section>
     <br />
     <div>
         <section>
@@ -18,17 +19,21 @@
                 <div class="card" style="width:30 rem;">
                     <img class="card-img-top" src="~/images/quejas.jpg" alt="ModuloQuejas">
                     <div class="card-body">
-                        <h5 class="card-title">Quejas</h5>
-                        <p class="card-text">Lo mas importante es saber tu opinión sobre nosotros y saber como poderlo mejorar.</p>
-                        <a href="#" class="btn btn-primary">Cuentanoslo</a>
+                        <h2 class="h5 card-title">Quejas</h2>
+                        <section>
+                            <p class="card-text">Lo mas importante es saber tu opinión sobre nosotros y saber como poderlo mejorar.</p>
+                            <a href="#" class="btn btn-primary">Cuentanoslo</a>
+                        </section>
                     </div>
                 </div>
                 <div class="card" style="width:30 rem;">
-                    <img class="card-img-top" src="~/images/urgencias.jpg" alt="ModuloUrgencias">
+                    <img class="card-img-top" src="~/images/urgencias.jpg" loading="lazy" alt="ModuloUrgencias">
                     <div class="card-body">
-                        <h5 class="card-title">Urgencias</h5>
-                        <p class="card-text">No hagas filas para tu registro, en cuestion de minutos entra a nuestra lista de urgencias desde nuestro modulo.</p>
-                        <a href="#" class="btn btn-primary">Urgencias</a>
+                        <h3 class="h5 card-title">Urgencias</h3>
+                        <section>
+                            <p class="card-text">No hagas filas para tu registro, en cuestion de minutos entra a nuestra lista de urgencias desde nuestro modulo.</p>
+                            <a href="#" class="btn btn-primary">Urgencias</a>
+                        </section>
                     </div>
                 </div>
             </div>
