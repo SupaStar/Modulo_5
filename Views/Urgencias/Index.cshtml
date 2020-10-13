@@ -27,7 +27,7 @@
         </div>
         <div class="col">
             @Html.TextBoxFor(x => x.FechaNac,
-           new { @class = "form-control", type = "date", placeholder = "Fecha de nacimiento." })
+           new { @class = "form-control", type = "date", min = fechaMin, max = fechaMax, placeholder = "Fecha de nacimiento." })
             @Html.ValidationMessageFor(x => x.FechaNac, null, new { @class = "text-danger" })
         </div>
     </div>
@@ -57,7 +57,7 @@
         </div>
         <div class="col">
             @Html.TextBoxFor(x => x.Telefono,
-           new { @class = "form-control", type = "number", placeholder = "123456789" })
+           new { @class = "form-control", type = "number", placeholder = "0123456789" })
             @Html.ValidationMessageFor(x => x.Telefono, null, new { @class = "text-danger" })
         </div>
     </div>
@@ -67,7 +67,7 @@
         </div>
         <div class="col">
             @Html.TextBoxFor(x => x.TelefonoF,
-           new { @class = "form-control", type = "number", placeholder = "123456789" })
+           new { @class = "form-control", type = "number", placeholder = "0123456789" })
             @Html.ValidationMessageFor(x => x.TelefonoF, null, new { @class = "text-danger" })
         </div>
     </div>
@@ -96,7 +96,7 @@
             <button class="btn btn-primary btn-lg">Enviar.</button>
         </div>
         <div class="col col-2">
-            <button class="btn btn-danger btn-lg" type="reset">Cancelar.</button>
+            <input class="btn btn-danger btn-lg" type="reset" value="Cancelar">.
         </div>
     </div>
 }

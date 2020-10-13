@@ -48,7 +48,6 @@ namespace Modulo_5.Controllers
         }
         public ActionResult Update(UrgenciaModel u)
         {
-            
             return View();
         }
     }

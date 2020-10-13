@@ -31,7 +31,7 @@ namespace Modulo_5
             services.AddSession(options =>
             {
                 options.Cookie.Name = ".Administrador.Session";
-                options.IdleTimeout = TimeSpan.FromSeconds(50);
+                options.IdleTimeout = TimeSpan.FromMinutes(50);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
@@ -69,14 +69,8 @@ namespace Modulo_5
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
-                    name: "urgencias",
-                    pattern: "{controller=Urgencias}/{action=Index}/{id?}");
-                endpoints.MapControllerRoute(
-                    name: "quejas",
-                    pattern: "{controller=Quejas}/{action=Index}/{id?}");
-                endpoints.MapControllerRoute(
-                    name: "editarUrgencia",
-                    pattern: "{controller=Urgencias}/{action=Editar}/{id?}");
+                    name: "sesion1",
+                    pattern: "{controller=Sesion}/{action=Iniciar}/{id?}");
             });
         }
     }

@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Data.Entity;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Modulo_5.Models
 {
@@ -12,16 +8,15 @@ namespace Modulo_5.Models
         [Key]
         public int Id { get; set; }
 
-        [Required(ErrorMessage ="El nombre es requerido.")]
+        [Required(ErrorMessage = "El nombre es requerido.")]
         public string Nombre { get; set; }
 
         [Required(ErrorMessage = "La fecha de nacimiento es requerida.")]
+        [DataType(DataType.DateTime, ErrorMessage = "La fecha de nacimiento es requerida.")]
         [Display(Name = "Fecha de Nacimiento")]
         public DateTime FechaNac { get; set; }
 
         [Required(ErrorMessage = "El email es requerido.")]
-        [StringLength(100, ErrorMessage = "Logitud máxima 100.")]
-        [DataType(DataType.EmailAddress, ErrorMessage = "Email error.")]
         [EmailAddress(ErrorMessage = "Correo electrónico incorrecto.")]
         public string Email { get; set; }
 
@@ -30,13 +25,16 @@ namespace Modulo_5.Models
         public int IdArea { get; set; }
 
         [Required(ErrorMessage = "El telefono es requerido.")]
+        [StringLength(10, MinimumLength = 8, ErrorMessage = "Introduce un telefono correcto.")]
         [Display(Name = "Telefono de contacto")]
-        public int Telefono { get; set; }
+        public string Telefono { get; set; }
 
+        [StringLength(10, MinimumLength = 8, ErrorMessage = "Introduce un telefono correcto.")]
         [Display(Name = "Telefono familiar (opcional):")]
-        public int TelefonoF { get; set; }
+        public string? TelefonoF { get; set; }
 
         [Required(ErrorMessage = "El numero de seguridad social es requerido.")]
+        [Display(Name = "Numero de seguridad social")]
         public int Nss { get; set; }
 
         [Required(ErrorMessage = "La descripcion de los malestares es requerida.")]

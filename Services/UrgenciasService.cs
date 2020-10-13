@@ -1,11 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Modulo_5.Controllers;
 using Modulo_5.Models;
 using Modulo_5.Services.Interfaces;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Modulo_5.Services
 {
@@ -69,8 +68,8 @@ namespace Modulo_5.Services
                 urgencia.FechaNac = Convert.ToDateTime(result[2]);
                 urgencia.Email = result[3].ToString();
                 urgencia.IdArea = Convert.ToInt32(result[4].ToString());
-                urgencia.Telefono = Convert.ToInt32(result[5].ToString());
-                urgencia.TelefonoF = Convert.ToInt32(result[6].ToString());
+                urgencia.Telefono = result[5].ToString();
+                urgencia.TelefonoF = result[6].ToString();
                 urgencia.Nss = Convert.ToInt32(result[7].ToString());
                 urgencia.Descripcion = result[8].ToString();
                 urgencia.Estado = Convert.ToInt32(result[9].ToString());
@@ -93,8 +92,8 @@ namespace Modulo_5.Services
                 urgencia.FechaNac = Convert.ToDateTime(result[2]);
                 urgencia.Email = result[3].ToString();
                 urgencia.IdArea = Convert.ToInt32(result[4].ToString());
-                urgencia.Telefono = Convert.ToInt32(result[5].ToString());
-                urgencia.TelefonoF = Convert.ToInt32(result[6].ToString());
+                urgencia.Telefono = result[5].ToString();
+                urgencia.TelefonoF = result[6].ToString();
                 urgencia.Nss = Convert.ToInt32(result[7].ToString());
                 urgencia.Descripcion = result[8].ToString();
                 urgencia.Estado = Convert.ToInt32(result[9].ToString());

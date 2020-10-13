@@ -5,6 +5,8 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
     List<UrgenciaModel> urgencias = ViewBag.urgencias;
 }
+<a asp-controller="Sesion" asp-action="IniciarS">Iniciar</a>
+<a asp-controller="Sesion" asp-action="VerSesion">Ver</a>
 <script src="https://kit.fontawesome.com/2a7e8c7373.js" crossorigin="anonymous"></script>
 <table class="table">
     <thead>
@@ -12,6 +14,7 @@
             <td>ID</td>
             <td>Nombre</td>
             <td>Telefono</td>
+            <td>Fecha consulta</td>
             <td>NSS</td>
             <td>Acciones</td>
         </tr>
@@ -22,18 +25,18 @@
             <tr>
                 <td>@urgencia.Id</td>
                 <td>@urgencia.Nombre</td>
+                <td>@urgencia.Telefono</td>
                 <td>@urgencia.FechaNac.ToShortDateString()</td>
                 <td>@urgencia.Nss</td>
                 <td>
-                    <a target="_blank" asp-route-id="@urgencia.Id" asp-controller="Urgencias" asp-action="Editar" type="button" class="btn btn-warning" aria-label="Editar">
-                    <i class="fas fa-pencil-ruler"></i>
+                    <a target="_blank" asp-route-id="@urgencia.Id" asp-controller="Urgencias" asp-action="Editar" type="button" class="btn btn-secondary" aria-label="Editar">
+                        <i class="fas fa-eye"></i>
                     </a>
                     <a type="button" class="btn btn-danger" aria-label="Eliminar">
-                    <i class="fas fa-trash"></i>
+                        <i class="fas fa-trash"></i>
                     </a>
                 </td>
             </tr>
         }
-
     </tbody>
 </table>

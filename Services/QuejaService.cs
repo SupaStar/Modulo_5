@@ -1,10 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Modulo_5.Controllers;
 using Modulo_5.Models;
 using Modulo_5.Services.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Modulo_5.Services
 {
