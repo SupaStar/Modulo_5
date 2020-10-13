@@ -2,7 +2,7 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
+  
   text-align: center;
   word-break: break-all;
 }
@@ -12,6 +12,7 @@ a {
   color: #0366d6;
 }
 
+
 .btn-primary {
   color: #fff;
   background-color: #1b6ec2;
@@ -19,7 +20,7 @@ a {
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
+  color: black;
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
@@ -57,7 +58,26 @@ html {
   position: relative;
   min-height: 100%;
 }
-
+.masthead {
+    background-image:linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url('/../images/bannerdoctor.jpg');
+    padding-top: 10%;
+    padding-bottom: calc(10rem - 100px);
+    background-position: 50%;
+    background-size: cover;
+}
+.headnosotros {
+    background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url('../images/bannernosotros.jpg');
+    padding-top: 10%;
+    padding-bottom: calc(10rem - 100px);
+    background-position: 50%;
+    background-size: cover;
+}
+.textositio {
+    text-align:center;
+    padding: 200px 0 150px;
+    color:#fff;
+    font: forte;
+}
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
@@ -69,3 +89,13 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+#navsec {
+    border-color: transparent;
+    background-color:white;
+    border-bottom: 1px solid rgba(33,37,41,.1);
+    transition: all .2s;
+}
+
+
+
+
