@@ -39,7 +39,7 @@ namespace Modulo_5.Controllers
         public ActionResult Administrador()
         {
             ViewBag.urgencias = _service.GetUrgencias();
-            return View();
+            return RedirectToAction("VistaUrgencias", "Admin");
         }
         public ActionResult Editar(int id)
         {
