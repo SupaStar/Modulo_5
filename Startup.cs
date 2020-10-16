@@ -69,8 +69,8 @@ namespace Modulo_5
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
-                    name: "sesion1",
-                    pattern: "{controller=Sesion}/{action=Iniciar}/{id?}");
+                    name: "administrador",
+                    pattern: "{controller=Admin}/{action=VistaLogin}");
             });
         }
     }
