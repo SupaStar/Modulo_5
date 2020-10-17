@@ -3,24 +3,34 @@
 *@
 @{
     Layout = "~/Views/Shared/Admin/_Layout.cshtml";
+    string errores = ViewBag.error;
 }
 @model UsuarioModel
-<a asp-controller="Urgencias" asp-action="Administrador">xdddd</a>
 <section>
     @using (Html.BeginForm("IniciarS", "Admin", FormMethod.Post))
     {
+        @if (errores != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                @errores
+            </div>
+        }
         @Html.AntiForgeryToken()
-        <div class="form-group">
-            @Html.LabelFor(x => x.Correo, new { @class = "col-form-label" })
-            @Html.TextBoxFor(x => x.Correo,
-           new { @class = "form-control", placeholder = "email@example.com", autofocus = "autofocus" })
-            @Html.ValidationMessageFor(x => x.Correo, null, new { @class = "text-danger" })
+        <div class="form-group row">
+            @Html.LabelFor(x => x.Correo, new { @class = "col-sm-4 col-form-label" })
+            <div class="col">
+                @Html.TextBoxFor(x => x.Correo,
+               new { @class = "form-control", placeholder = "email@example.com", autofocus = "autofocus" })
+                @Html.ValidationMessageFor(x => x.Correo, null, new { @class = "text-danger" })
+            </div>
         </div>
-        <div class="form-group">
-            @Html.LabelFor(x => x.Password, new { @class = "col-form-label" })
-            @Html.TextBoxFor(x => x.Password,
-           new { @class = "form-control", placeholder = "Password" })
-            @Html.ValidationMessageFor(x => x.Password, null, new { @class = "text-danger" })
+        <div class="form-group row">
+            @Html.LabelFor(x => x.Password, new { @class = "col-sm-4 col-form-label" })
+            <div class="col">
+                @Html.TextBoxFor(x => x.Password,
+               new { @class = "form-control", type = "password", placeholder = "Password" })
+                @Html.ValidationMessageFor(x => x.Password, null, new { @class = "text-danger" })
+            </div>
         </div>
         <div class="form-group">
             <div class="form-check">
