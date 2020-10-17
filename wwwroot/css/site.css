@@ -78,6 +78,12 @@ html {
     color:#fff;
     font: forte;
 }
+.textonosotros {
+    text-align: center;
+    padding: 200px 0 150px;
+    color: black;
+    font: forte;
+}
 body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
