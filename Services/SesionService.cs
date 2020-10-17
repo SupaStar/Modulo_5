@@ -25,7 +25,7 @@ namespace Modulo_5.Services
             using (SHA256 sha256Hash = SHA256.Create())
             {
                 MySqlConnection conn = conexion.conectar();
-                string sql = "Select * from usuario where correo=@p1";
+                string sql = "Select * from login where nombre_usuario=@p1";
                 MySqlCommand m = conn.CreateCommand();
                 m.CommandText = sql;
                 m.Parameters.AddWithValue("@p1", usuario.Correo);
@@ -35,7 +35,7 @@ namespace Modulo_5.Services
                     var dbHash = "";
                     while (result.Read())
                     {
-                        dbHash = result[2].ToString();
+                        dbHash = result[1].ToString();
                     }
                     if (VerifyHash(sha256Hash, usuario.Password, dbHash))
                     {

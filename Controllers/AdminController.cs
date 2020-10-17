@@ -10,18 +10,28 @@ namespace Modulo_5.Controllers
     public class AdminController : Controller
     {
         SesionService _service;
+        string sesion;
         public AdminController(IConfiguration conf)
         {
             this._service = new SesionService(conf);
         }
-
+        public void CargarSesion()
+        {
+            this.sesion = HttpContext.Session.GetString("_Nombre");
+        }
         public IActionResult VistaLogin()
         {
+            HttpContext.Session.Clear();
             return View("Login");
         }
         public IActionResult VistaUrgencias()
         {
-            return View("Urgencias");
+            CargarSesion();
+            if (this.sesion != null)
+            {
+                return View("Urgencias");
+            }
+            return RedirectToAction("VistaLogin","Admin");
         }
 
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
@@ -34,13 +44,12 @@ namespace Modulo_5.Controllers
                 {
                     HttpContext.Session.SetString(usuario.SessionK_Name, usuario.Correo);
                     HttpContext.Session.SetInt32("_Age", 773);
-                    return new { estado = true, detalle = HttpContext.Session.GetString("_Nombre") };
+                    return RedirectToAction("VistaUrgencias", "Admin");
                 }
-                return new { estado = false, detalle = "Datos invalidos" };
-            }
-            else
-            {
-                return new { estado = false, detalle = "Datos invalidos" };
+                ViewBag.error = "Datos incorrectos";
+                return View("Login");
+            }else{
+                return View("Login");
             }
         }
         public object VerSesion()
