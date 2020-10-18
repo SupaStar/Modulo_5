@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using MimeKit;
+using MimeKit.Text;
 using Modulo_5.Models;
 using Modulo_5.Services;
 
@@ -33,6 +36,33 @@ namespace Modulo_5.Controllers
             if (ModelState.IsValid)
             {
                 _service.AddUrgencia(u);
+                try
+                {
+                    var mensaje = new MimeMessage();
+                    mensaje.To.Add(new MailboxAddress("Para: ",u.Email));
+                    mensaje.From.Add(new MailboxAddress("Modulo de Urgencias", "from@domail.com"));
+                    //E-mail subject 
+                    mensaje.Subject = "Registro de Urgencias";
+                    //E-mail message body
+                    mensaje.Body = new TextPart(TextFormat.Html)
+                    {
+                        
+                        Text = "Hola "+ u.Nombre + " Se notifica su registro en la fecha: "+u.FechaNac+" por la descripcion: "+u.Descripcion
+                    };
+
+                    //Configure the e-mail
+                    using (var emailClient = new SmtpClient())
+                    {
+                        emailClient.Connect("smtp.gmail.com", 587, false);
+                        emailClient.Authenticate("pruebasmodulo5cetis@gmail.com", "Ulisestortuga1");
+                        emailClient.Send(mensaje);
+                        emailClient.Disconnect(true);
+                    }
+                }
+                catch
+                {
+
+                }
                 return RedirectToAction("Index", "Home");
             }
             return View("Nuevo");
