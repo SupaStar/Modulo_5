@@ -15,6 +15,7 @@ namespace Modulo_5.Services.Interfaces
         public UrgenciaModel UpdateUrgencia(int id, UrgenciaModel urgenciaItem);
 
         public Boolean DeleteUrgencia(int id);
+
         public UrgenciaModel FindUrgencia(int id);
     }
 }

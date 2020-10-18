@@ -6,6 +6,7 @@
     String fechaMin = dt.ToString("yyyy-MM-dd");
     dt = dt.AddDays(7);
     String fechaMax = dt.ToString("yyyy-MM-dd");
+    List<AreaModel> areas = ViewBag.areas;
 }
 @model UrgenciaModel
 <section>
@@ -21,27 +22,19 @@
             </div>
         </div>
         <div class="form-group row">
-            @Html.LabelFor(x => x.FechaNac, new { @class = "col-sm-4 col-form-label" })
+            @Html.LabelFor(x => x.Ap_paterno, new { @class = "col-sm-4 col-form-label" })
             <div class="col">
-                @Html.TextBoxFor(x => x.FechaNac,
-               new { @class = "form-control", type = "date", min = fechaMin, max = fechaMax, placeholder = "Fecha de nacimiento." })
-                @Html.ValidationMessageFor(x => x.FechaNac, null, new { @class = "text-danger" })
+                @Html.TextBoxFor(x => x.Ap_paterno,
+               new { @class = "form-control", placeholder = "Apellido paterno.", autofocus = "autofocus" })
+                @Html.ValidationMessageFor(x => x.Ap_paterno, null, new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group row">
-            @Html.LabelFor(x => x.Email, new { @class = "col-sm-4 col-form-label" })
+            @Html.LabelFor(x => x.Ap_materno, new { @class = "col-sm-4 col-form-label" })
             <div class="col">
-                @Html.TextBoxFor(x => x.Email,
-               new { @class = "form-control", type = "text", placeholder = "name@example.com." })
-                @Html.ValidationMessageFor(x => x.Email, null, new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group row">
-            @Html.LabelFor(x => x.IdArea, new { @class = "col-sm-4 col-form-label" })
-            <div class="col">
-                <select id="IdArea" name="IdArea" class="form-control" required>
-                    <option value="1">Determinado</option>
-                </select>
+                @Html.TextBoxFor(x => x.Ap_materno,
+               new { @class = "form-control", placeholder = "Apellido materno.", autofocus = "autofocus" })
+                @Html.ValidationMessageFor(x => x.Ap_materno, null, new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group row">
@@ -61,11 +54,38 @@
             </div>
         </div>
         <div class="form-group row">
+            @Html.LabelFor(x => x.Email, new { @class = "col-sm-4 col-form-label" })
+            <div class="col">
+                @Html.TextBoxFor(x => x.Email,
+               new { @class = "form-control", type = "text", placeholder = "name@example.com." })
+                @Html.ValidationMessageFor(x => x.Email, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(x => x.Fecha_nac, new { @class = "col-sm-4 col-form-label" })
+            <div class="col">
+                @Html.TextBoxFor(x => x.Fecha_nac,
+               new { @class = "form-control", type = "date", min = fechaMin, max = fechaMax, placeholder = "Fecha de nacimiento." })
+                @Html.ValidationMessageFor(x => x.Fecha_nac, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
             @Html.LabelFor(x => x.Nss, new { @class = "col-sm-4 col-form-label" })
             <div class="col">
                 @Html.TextBoxFor(x => x.Nss,
                new { @class = "form-control", type = "number", placeholder = "123456789" })
                 @Html.ValidationMessageFor(x => x.Nss, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(x => x.IdArea, new { @class = "col-sm-4 col-form-label" })
+            <div class="col">
+                <select id="IdArea" name="IdArea" class="form-control" required>
+                    @foreach(AreaModel area in areas)
+                    {
+                        <option value="@area.Id">@area.Nombre</option>
+                    }
+                </select>
             </div>
         </div>
         <div class="form-group row">
@@ -82,7 +102,6 @@
             </div>
             <div class="col col-2">
                 <input class="btn btn-danger btn-lg" type="reset" value="Cancelar">.
-
             </div>
         </div>
     }

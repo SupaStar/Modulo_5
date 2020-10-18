@@ -13,7 +13,7 @@ namespace Modulo_5.Services
     public class SesionService : IUsuario
     {
         DbController conexion;
-
+        Encriptador encri = new Encriptador();
         public SesionService(IConfiguration conf)
         {
             this.conexion = new DbController();
@@ -35,9 +35,10 @@ namespace Modulo_5.Services
                     var dbHash = "";
                     while (result.Read())
                     {
-                        dbHash = result[1].ToString();
+                        dbHash = result[2].ToString();
+                        usuario.Id = Convert.ToInt32(result[3].ToString());
                     }
-                    if (VerifyHash(sha256Hash, usuario.Password, dbHash))
+                    if (encri.VerifyHash(sha256Hash, usuario.Password, dbHash))
                     {
                         return true;
                     }
@@ -52,22 +53,6 @@ namespace Modulo_5.Services
                 }
 
             }
-        }
-        private static string Hashing(HashAlgorithm hashAlgorithm, string input)
-        {
-            byte[] data = hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(input));
-            var sBuilder = new StringBuilder();
-            for (int i = 0; i < data.Length; i++)
-            {
-                sBuilder.Append(data[i].ToString("x2"));
-            }
-            return sBuilder.ToString();
-        }
-        private static bool VerifyHash(HashAlgorithm hashAlgorithm, string input, string hash)
-        {
-            var hashOfInput = Hashing(hashAlgorithm, input);
-            StringComparer comparer = StringComparer.OrdinalIgnoreCase;
-            return comparer.Compare(hashOfInput, hash) == 0;
         }
     }
 

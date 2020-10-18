@@ -10,14 +10,17 @@ namespace Modulo_5.Controllers
     public class AdminController : Controller
     {
         SesionService _service;
+        private UrgenciasService _serviceUrg;
         string sesion;
         public AdminController(IConfiguration conf)
         {
             this._service = new SesionService(conf);
+            this._serviceUrg = new UrgenciasService(conf);
         }
         public void CargarSesion()
         {
-            this.sesion = HttpContext.Session.GetString("_Nombre");
+            UsuarioModel usu = new UsuarioModel();
+            this.sesion = HttpContext.Session.GetString(usu.SessionK_Name);
         }
         public IActionResult VistaLogin()
         {
@@ -29,6 +32,7 @@ namespace Modulo_5.Controllers
             CargarSesion();
             if (this.sesion != null)
             {
+                ViewBag.urgencias = _serviceUrg.GetUrgencias();
                 return View("Urgencias");
             }
             return RedirectToAction("VistaLogin","Admin");
@@ -42,7 +46,7 @@ namespace Modulo_5.Controllers
                 bool estado = _service.IniciarSesion(usuario);
                 if (estado)
                 {
-                    HttpContext.Session.SetString(usuario.SessionK_Name, usuario.Correo);
+                    HttpContext.Session.SetString(usuario.SessionK_Name, usuario.Id.ToString());
                     HttpContext.Session.SetInt32("_Age", 773);
                     return RedirectToAction("VistaUrgencias", "Admin");
                 }
@@ -54,7 +58,8 @@ namespace Modulo_5.Controllers
         }
         public object VerSesion()
         {
-            return new { estado = true, detalle = HttpContext.Session.GetString("_Nombre") };
+            UsuarioModel usu = new UsuarioModel();
+            return new { estado = true, detalle = HttpContext.Session.GetString(usu.SessionK_Name) };
         }
         public object CerrarSesion()
         {

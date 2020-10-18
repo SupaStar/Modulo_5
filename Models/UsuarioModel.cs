@@ -19,6 +19,6 @@ namespace Modulo_5.Models
         [Display(Name = "Contraseña:")]
         public string Password { get; set; }
 
-        public string SessionK_Name = "_Nombre";
+        public string SessionK_Name = "_Id";
     }
 }

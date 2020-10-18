@@ -22,6 +22,7 @@ namespace Modulo_5.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.areas = _service.getAreas();
             return View("Nuevo");
         }
 
@@ -38,17 +39,22 @@ namespace Modulo_5.Controllers
         }
         public ActionResult Administrador()
         {
-            ViewBag.urgencias = _service.GetUrgencias();
             return RedirectToAction("VistaUrgencias", "Admin");
         }
         public ActionResult Editar(int id)
         {
+            ViewBag.areas = _service.getAreas();
             ViewBag.urgencia = _service.FindUrgencia(id);
             return View();
         }
         public ActionResult Update(UrgenciaModel u)
         {
             return View();
+        }
+        public ActionResult Eliminar(int id)
+        {
+            _service.DeleteUrgencia(id);
+            return RedirectToAction("VistaUrgencias", "Admin");
         }
     }
 }

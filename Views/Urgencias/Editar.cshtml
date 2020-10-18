@@ -2,10 +2,26 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    UrgenciaModel urgencia = ViewBag.urgencia;
-    String fecha = urgencia.FechaNac.ToString("yyyy-MM-dd");
+    UrgenciaModel u = ViewBag.urgencia;
+    String fecha = u.Fecha_nac.ToString("yyyy-MM-dd");
+    List<AreaModel> areas = ViewBag.areas;
 }
-<form method="post">
+@model UrgenciaModel
+<section>
+    @using (Html.BeginForm("Update", "Urgencias", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group row">
+            @Html.LabelFor(u => u.Nombre, new { @class = "col-sm-4 col-form-label" })
+            <div class="col">
+                @Html.TextBoxFor(u => u.Nombre,
+               new { @class = "form-control", placeholder = "Nombre.", autofocus = "autofocus" })
+                @Html.ValidationMessageFor(u => u.Nombre, null, new { @class = "text-danger" })
+            </div>
+        </div>
+    }
+</section>
+@*<form method="post">
     <input hidden id="Id" name="Id" value="@urgencia.Id" />
     <div class="row">
         <div class="col-lg-5">
@@ -37,7 +53,20 @@
         </div>
         <div class="col">
             <select id="IdArea" name="IdArea" value="@urgencia.IdArea" required>
-                <option value="1">Determinado</option>
+                <option value="2">aaaaaa</option>
+                <option value="3">aaaasadasdaa</option>
+                <option value="4">adaa</option>
+                @foreach (AreaModel area in areas)
+                {
+                    @if (area.Id == urgencia.IdArea)
+                    {
+                        <option value="@area.Id" selected>@area.Nombre</option>
+                    }
+                    else
+                    {
+                        <option value="@area.Id">@area.Nombre</option>
+                    }
+                }
             </select>
         </div>
     </div>
@@ -81,4 +110,4 @@
             <button class="btn btn-danger btn-lg" type="reset">Cancelar.</button>
         </div>
     </div>
-</form>
+</form>*@
