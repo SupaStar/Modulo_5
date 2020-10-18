@@ -34,7 +34,7 @@ namespace Modulo_5.Controllers
                 _service.AddUrgencia(u);
                 return RedirectToAction("Index", "Home");
             }
-            return View("Index");
+            return View("Nuevo");
         }
         public ActionResult Administrador()
         {
