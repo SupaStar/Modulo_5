@@ -23,6 +23,7 @@ namespace Modulo_5.Services
 
         public UrgenciaModel AddUrgencia(UrgenciaModel urgenciaItem)
         {
+
             MySqlConnection conn = conexion.conectar();
             string sqlInsert = "INSERT INTO urgencias(Id,nombre,fecha_nac,email,idArea,telefono,telefonoF,nss,descripcion) VALUES(null,@p1,@p2,@p3,@p4,@p5,@p6,@p7,@p8)";
             MySqlCommand m = conn.CreateCommand();
