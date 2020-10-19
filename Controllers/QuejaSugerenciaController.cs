@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
 using Modulo_5.Models;
 using Modulo_5.Services;
@@ -25,6 +26,8 @@ namespace Modulo_5.Controllers
         public IActionResult Queja()
         {
             //TODO Rehacer formulario con modelbinding
+            List<TipoQueja> tipos = _quejaServ.cargarTipos();
+            ViewBag.tipos = tipos.Select(x => new SelectListItem() { Text = x.Nombre, Value = x.Id.ToString() });
             return View("AgregarQueja");
         }
         public IActionResult Sugerencia()
@@ -38,6 +41,8 @@ namespace Modulo_5.Controllers
             {
                 _quejaServ.AddQueja(queja);
             }
+            List<TipoQueja> tipos = _quejaServ.cargarTipos();
+            ViewBag.tipos = tipos.Select(x => new SelectListItem() { Text = x.Nombre, Value = x.Id.ToString() });
             return View("AgregarQueja");
         }
     }

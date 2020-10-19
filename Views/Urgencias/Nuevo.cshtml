@@ -57,7 +57,7 @@
             @Html.LabelFor(x => x.Email, new { @class = "col-sm-4 col-form-label" })
             <div class="col">
                 @Html.TextBoxFor(x => x.Email,
-               new { @class = "form-control", type = "text", placeholder = "name@example.com." })
+               new { @class = "form-control", type = "text", placeholder = "name@example.com" })
                 @Html.ValidationMessageFor(x => x.Email, null, new { @class = "text-danger" })
             </div>
         </div>
