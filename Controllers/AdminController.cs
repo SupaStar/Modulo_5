@@ -22,21 +22,6 @@ namespace Modulo_5.Controllers
             UsuarioModel usu = new UsuarioModel();
             this.sesion = HttpContext.Session.GetString(usu.SessionK_Name);
         }
-        public IActionResult VistaLogin()
-        {
-            HttpContext.Session.Clear();
-            return View("Login");
-        }
-        public IActionResult VistaUrgencias()
-        {
-            CargarSesion();
-            if (this.sesion != null)
-            {
-                ViewBag.urgencias = _serviceUrg.GetUrgencias();
-                return View("Urgencias");
-            }
-            return RedirectToAction("VistaLogin","Admin");
-        }
 
         [Microsoft.AspNetCore.Authorization.AllowAnonymous]
         public object IniciarS(UsuarioModel usuario)
@@ -52,7 +37,9 @@ namespace Modulo_5.Controllers
                 }
                 ViewBag.error = "Datos incorrectos";
                 return View("Login");
-            }else{
+            }
+            else
+            {
                 return View("Login");
             }
         }
@@ -66,5 +53,33 @@ namespace Modulo_5.Controllers
             HttpContext.Session.Clear();
             return new { estado = true, detalle = "Sesion terminada con exito." };
         }
+
+        //Vistas
+        public IActionResult Login()
+        {
+            HttpContext.Session.Clear();
+            return View("Login");
+        }
+        public IActionResult VistaUrgencias()
+        {
+            CargarSesion();
+            if (this.sesion != null)
+            {
+                ViewBag.urgencias = _serviceUrg.GetUrgencias();
+                return View("Urgencias");
+            }
+            return RedirectToAction("Login", "Admin");
+        }
+        public IActionResult VistaEditarUrgencia(int id)
+        {
+            CargarSesion();
+            if (this.sesion != null)
+            {
+                return RedirectToAction("Editar", "Urgencias", new { id });
+            }
+            return RedirectToAction("Login", "Admin");
+        }
+        
+        //TODO hacer vistas para las sugerencias
     }
 }

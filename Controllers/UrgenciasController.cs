@@ -38,6 +38,7 @@ namespace Modulo_5.Controllers
                 _service.AddUrgencia(u);
                 try
                 {
+                    //TODO Mandar boton con token para ver una vista
                     var mensaje = new MimeMessage();
                     mensaje.To.Add(new MailboxAddress("Para: ",u.Email));
                     mensaje.From.Add(new MailboxAddress("Modulo de Urgencias", "from@domail.com"));
@@ -69,13 +70,18 @@ namespace Modulo_5.Controllers
         }
         public ActionResult Editar(int id)
         {
+            //TODO terminar formulario
             ViewBag.areas = _service.getAreas();
             ViewBag.urgencia = _service.FindUrgencia(id);
             return View();
         }
         public ActionResult Update(UrgenciaModel u)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+
+            }
+            return View("Editar");
         }
         public ActionResult Eliminar(int id)
         {

@@ -14,100 +14,107 @@
         <div class="form-group row">
             @Html.LabelFor(u => u.Nombre, new { @class = "col-sm-4 col-form-label" })
             <div class="col">
-                @Html.TextBoxFor(u => u.Nombre,
-               new { @class = "form-control", placeholder = "Nombre.", autofocus = "autofocus" })
-                @Html.ValidationMessageFor(u => u.Nombre, null, new { @class = "text-danger" })
+                @Html.TextBox("Nombre", u.Nombre, new { @class = "form-control", placeholder = "Nombre.", autofocus = "autofocus" })
+                @Html.ValidationMessageFor(x => x.Nombre, null, new { @class = "text-danger" })
             </div>
         </div>
+        <div class="form-group row">
+            @Html.LabelFor(u => u.Nombre, new { @class = "col-sm-4 col-form-label" })
+            <div class="col">
+                @Html.TextBox("Nombre", u.Nombre, new { @class = "form-control", placeholder = "Nombre.", autofocus = "autofocus" })
+                @Html.ValidationMessageFor(x => x.Nombre, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <button>xdddddd</button>
     }
 </section>
 @*<form method="post">
-    <input hidden id="Id" name="Id" value="@urgencia.Id" />
-    <div class="row">
-        <div class="col-lg-5">
-            <label for="nombre">Nombre del pacinete:*</label>
+        <input hidden id="Id" name="Id" value="@urgencia.Id" />
+        <div class="row">
+            <div class="col-lg-5">
+                <label for="nombre">Nombre del pacinete:*</label>
+            </div>
+            <div class="col">
+                <input id="nombre" name="nombre" type="text" alt="Nombre" placeholder="Pepe Problemas" value="@urgencia.Nombre" required>
+            </div>
         </div>
-        <div class="col">
-            <input id="nombre" name="nombre" type="text" alt="Nombre" placeholder="Pepe Problemas" value="@urgencia.Nombre" required>
+        <div class="row">
+            <div class="col-lg-5">
+                <label for="FechaNac">Fecha de nacimiento:*</label>
+            </div>
+            <div class="col">
+                <input id="FechaNac" name="FechaNac" type="date" alt="Fecha de nacimiento" value="@fecha" required>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-5">
-            <label for="FechaNac">Fecha de nacimiento:*</label>
+        <div class="row">
+            <div class="col-lg-5">
+                <label for="email">Correo electronico:*</label>
+            </div>
+            <div class="col">
+                <input id="email" name="email" type="email" alt="name@example.com" value="@urgencia.Email" required>
+            </div>
         </div>
-        <div class="col">
-            <input id="FechaNac" name="FechaNac" type="date" alt="Fecha de nacimiento" value="@fecha" required>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-5">
-            <label for="email">Correo electronico:*</label>
-        </div>
-        <div class="col">
-            <input id="email" name="email" type="email" alt="name@example.com" value="@urgencia.Email" required>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-5">
-            <label for="IdArea">Area de urgencia:*</label>
-        </div>
-        <div class="col">
-            <select id="IdArea" name="IdArea" value="@urgencia.IdArea" required>
-                <option value="2">aaaaaa</option>
-                <option value="3">aaaasadasdaa</option>
-                <option value="4">adaa</option>
-                @foreach (AreaModel area in areas)
-                {
-                    @if (area.Id == urgencia.IdArea)
+        <div class="row">
+            <div class="col-lg-5">
+                <label for="IdArea">Area de urgencia:*</label>
+            </div>
+            <div class="col">
+                <select id="IdArea" name="IdArea" value="@urgencia.IdArea" required>
+                    <option value="2">aaaaaa</option>
+                    <option value="3">aaaasadasdaa</option>
+                    <option value="4">adaa</option>
+                    @foreach (AreaModel area in areas)
                     {
-                        <option value="@area.Id" selected>@area.Nombre</option>
+                        @if (area.Id == urgencia.IdArea)
+                        {
+                            <option value="@area.Id" selected>@area.Nombre</option>
+                        }
+                        else
+                        {
+                            <option value="@area.Id">@area.Nombre</option>
+                        }
                     }
-                    else
-                    {
-                        <option value="@area.Id">@area.Nombre</option>
-                    }
-                }
-            </select>
+                </select>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-5">
-            <label for="Telefono">Telefono de contacto:*</label>
+        <div class="row">
+            <div class="col-lg-5">
+                <label for="Telefono">Telefono de contacto:*</label>
+            </div>
+            <div class="col">
+                <input id="Telefono" name="Telefono" type="tel" alt="123456789" value="@urgencia.Telefono" required>
+            </div>
         </div>
-        <div class="col">
-            <input id="Telefono" name="Telefono" type="tel" alt="123456789" value="@urgencia.Telefono" required>
+        <div class="row">
+            <div class="col-lg-5">
+                <label for="TelefonoF">Telefono familiar (opcional):</label>
+            </div>
+            <div class="col">
+                <input id="TelefonoF" name="TelefonoF" type="tel" alt="123456789" value="@urgencia.TelefonoF">
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-5">
-            <label for="TelefonoF">Telefono familiar (opcional):</label>
+        <div class="row">
+            <div class="col-lg-5">
+                <label for="nss">Numero de seguridad social:*</label>
+            </div>
+            <div class="col">
+                <input id="nss" name="nss" type="number" alt="123456789" value="@urgencia.Nss" required>
+            </div>
         </div>
-        <div class="col">
-            <input id="TelefonoF" name="TelefonoF" type="tel" alt="123456789" value="@urgencia.TelefonoF">
+        <div class="row">
+            <div class="col-lg-5">
+                <label for="Descripcion">Descripcion de los malestares:*</label>
+            </div>
+            <div class="col-lg-7">
+                <textarea id="Descripcion" name="Descripcion" type="text" required>@urgencia.Descripcion</textarea>
+            </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-5">
-            <label for="nss">Numero de seguridad social:*</label>
+        <div class="row justify-content-md-center">
+            <div class="col col-2">
+                <button class="btn btn-primary btn-lg" asp-controller="Urgencias" asp-action="Update">Enviar.</button>
+            </div>
+            <div class="col col-2">
+                <button class="btn btn-danger btn-lg" type="reset">Cancelar.</button>
+            </div>
         </div>
-        <div class="col">
-            <input id="nss" name="nss" type="number" alt="123456789" value="@urgencia.Nss" required>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-5">
-            <label for="Descripcion">Descripcion de los malestares:*</label>
-        </div>
-        <div class="col-lg-7">
-            <textarea id="Descripcion" name="Descripcion" type="text" required>@urgencia.Descripcion</textarea>
-        </div>
-    </div>
-    <div class="row justify-content-md-center">
-        <div class="col col-2">
-            <button class="btn btn-primary btn-lg" asp-controller="Urgencias" asp-action="Update">Enviar.</button>
-        </div>
-        <div class="col col-2">
-            <button class="btn btn-danger btn-lg" type="reset">Cancelar.</button>
-        </div>
-    </div>
-</form>*@
+    </form>*@

@@ -70,7 +70,7 @@ namespace Modulo_5
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapControllerRoute(
                     name: "administrador",
-                    pattern: "{controller=Admin}/{action=VistaLogin}");
+                    pattern: "{controller=Admin}/{action=Login}");
             });
         }
     }
