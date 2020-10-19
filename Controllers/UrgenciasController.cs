@@ -45,8 +45,11 @@ namespace Modulo_5.Controllers
                     mensaje.Subject = "Registro de Urgencias";
                     mensaje.Body = new TextPart(TextFormat.Html)
                     {
-                        
-                        Text = "Hola "+ u.Nombre + " Se notifica su registro en la fecha: "+u.Fecha_nac+" por la descripcion: "+u.Descripcion
+
+
+                        Text = "Hola " + u.Nombre + " Se notifica su registro en la fecha: " + u.Fecha_nac + "<br> <a type="+string.Format(@"button")+">"+ u.Token+"</a>"
+                   
+                    
                     };
                     using (var emailClient = new SmtpClient())
                     {
