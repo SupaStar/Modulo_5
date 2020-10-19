@@ -15,9 +15,11 @@ namespace Modulo_5.Controllers
 {
     public class UrgenciasController : Controller
     {
+        private ILogger _logger;
         private UrgenciasService _service;
-        public UrgenciasController(IConfiguration conf)
+        public UrgenciasController(ILogger<UrgenciasController> logger, IConfiguration conf)
         {
+            _logger = logger;
             _service = new UrgenciasService(conf);
         }
 
@@ -38,7 +40,7 @@ namespace Modulo_5.Controllers
                 {
                     //TODO Mandar boton con token para ver una vista
                     var mensaje = new MimeMessage();
-                    mensaje.To.Add(new MailboxAddress("Para: ", u.Email));
+                    mensaje.To.Add(new MailboxAddress("Para: ",u.Email));
                     mensaje.From.Add(new MailboxAddress("Modulo de Urgencias", "from@domail.com"));
                     mensaje.Subject = "Registro de Urgencias";
                     mensaje.Body = new TextPart(TextFormat.Html)
@@ -85,9 +87,6 @@ namespace Modulo_5.Controllers
             _service.DeleteUrgencia(id);
             return RedirectToAction("VistaUrgencias", "Admin");
         }
-        public ActionResult VerCitaPaciente(string token)
-        {
-            return View();
-        }
+        
     }
 }
