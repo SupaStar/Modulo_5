@@ -39,6 +39,7 @@ namespace Modulo_5
             services.AddControllersWithViews();
             services.AddTransient<MySqlConnection>(_ => new MySqlConnection(Configuration["ConnectionStrings:Default"]));
             services.AddSingleton<IUrgencia, UrgenciasService>();
+            services.AddSingleton<IQueja, QuejaService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,6 +72,9 @@ namespace Modulo_5
                 endpoints.MapControllerRoute(
                     name: "administrador",
                     pattern: "{controller=Admin}/{action=Login}");
+                endpoints.MapControllerRoute(
+                    name: "citaUsuario",
+                    pattern: "{controller=Urgencias}/{action=VerCitaPaciente}/{token}");
             });
         }
     }

@@ -3,11 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Modulo_5.Models;
+using Modulo_5.Services;
 
 namespace Modulo_5.Controllers
 {
     public class QuejaSugerenciaController : Controller
     {
+        QuejaService _quejaServ;
+
+        public QuejaSugerenciaController(IConfiguration conf)
+        {
+            _quejaServ = new QuejaService(conf);
+        }
+
         public IActionResult Menu()
         {
             return View();
@@ -20,6 +30,14 @@ namespace Modulo_5.Controllers
         public IActionResult Sugerencia()
         {
             //TODO Hacer formulario y vista
+            return View("AgregarQueja");
+        }
+        public ActionResult addQueja(QuejaModel queja)
+        {
+            if (ModelState.IsValid)
+            {
+                _quejaServ.AddQueja(queja);
+            }
             return View("AgregarQueja");
         }
     }
