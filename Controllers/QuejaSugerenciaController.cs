@@ -44,6 +44,7 @@ namespace Modulo_5.Controllers
             List<TipoQueja> tipos = _quejaServ.cargarTipos();
             ViewBag.tipos = tipos.Select(x => new SelectListItem() { Text = x.Nombre, Value = x.Id.ToString() });
             return View("AgregarQueja");
+
         }
     }
 }
