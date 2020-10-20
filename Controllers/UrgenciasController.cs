@@ -38,16 +38,16 @@ namespace Modulo_5.Controllers
                 _service.AddUrgencia(u);
                 try
                 {
-                    //TODO Mandar boton con token para ver una vista
                     var mensaje = new MimeMessage();
-                    mensaje.To.Add(new MailboxAddress("Para: ",u.Email));
+                    mensaje.To.Add(new MailboxAddress("Para: ", u.Email));
                     mensaje.From.Add(new MailboxAddress("Modulo de Urgencias", "from@domail.com"));
                     mensaje.Subject = "Registro de Urgencias";
                     string token = u.Token;
                     mensaje.Body = new TextPart(TextFormat.Html)
                     {
                         //Text = "Hola " + u.Nombre + " Se notifica su registro en la fecha: " + u.Fecha_nac + "<br> <a asp-route-token="+ string.Format(@""+ u.Token + "")+" asp-action='VerCitaPaciente' asp-controller='Urgencias' href=" + string.Format(@"https://localhost:44381/Urgencias/VerCitaPaciente/")+">"+ "Ver Cita"+"</a>"
-                        Text = "Hola " + u.Nombre + " Se notifica su registro en la fecha: " + u.Fecha_nac + "<br> <a asp-route-token=" + "31e27d67c1fc0f8d0622f78a5354d175f75844267330d518987d8186da2d0d06" + " asp-action='VerCitaPaciente' asp-controller ='Urgencias'href=" + string.Format(@"https://localhost:44381/Urgencias/VerCitaPaciente/" + u.Token)+">" + "Ver Cita" + "</a>"
+                        Text = "Hola " + u.Nombre + " Se notifica su registro en la fecha: " + u.Fecha_nac + "<br>" +
+                        "<a href='https://localhost:44381/Urgencias/VerCitaPaciente/" + u.Token + "'>Ver Cita</a>"
                     };
                     using (var emailClient = new SmtpClient())
                     {
@@ -63,6 +63,7 @@ namespace Modulo_5.Controllers
                 }
                 return RedirectToAction("Index", "Home");
             }
+            ViewBag.areas = _service.getAreas();
             return View("Nuevo");
         }
         public ActionResult Administrador()
@@ -89,13 +90,10 @@ namespace Modulo_5.Controllers
             _service.DeleteUrgencia(id);
             return RedirectToAction("VistaUrgencias", "Admin");
         }
-        public ActionResult VerCitaPaciente (string token)
+        public ActionResult VerCitaPaciente(string id)
         {
-           ViewBag.urgencia = _service.ViewUrgencia(token);
-            
+            ViewBag.urgencia = _service.ViewUrgencia(id);
             return View();
-             
         }
-        
     }
 }

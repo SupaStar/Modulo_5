@@ -74,7 +74,7 @@ namespace Modulo_5
                     pattern: "{controller=Admin}/{action=Login}");
                 endpoints.MapControllerRoute(
                     name: "citaUsuario",
-                    pattern: "{controller=Urgencias}/{action=VerCitaPaciente}/{token}");
+                    pattern: "{controller=Urgencias}/{action=VerCitaPaciente}/{id}");
             });
         }
     }
