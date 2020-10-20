@@ -162,5 +162,34 @@ namespace Modulo_5.Services
             conn.Close();
             return urgenciaItem;
         }
+        public UrgenciaModel ViewUrgencia(string token)
+        {
+            MySqlConnection conn = conexion.conectar();
+            string sql = "SELECT * FROM URGENCIA WHERE token=@p1";
+            MySqlCommand m = conn.CreateCommand();
+            m.CommandText = sql;
+            m.Parameters.AddWithValue("@p1", token);
+            MySqlDataReader result = m.ExecuteReader();
+            UrgenciaModel urgencia = new UrgenciaModel();
+            while (result.Read())
+            {
+                urgencia.Id = Convert.ToInt32(result[0].ToString());
+                urgencia.Nombre = result[1].ToString();
+                urgencia.Ap_paterno = result[2].ToString();
+                urgencia.Ap_materno = result[3].ToString();
+                urgencia.Telefono = result[4].ToString();
+                urgencia.TelefonoF = result[5].ToString();
+                urgencia.Email = result[6].ToString();
+                urgencia.Fecha_nac = Convert.ToDateTime(result[7]);
+                urgencia.Nss = Convert.ToInt32(result[8].ToString());
+                urgencia.Descripcion = result[9].ToString();
+                urgencia.Token = result[10].ToString();
+                urgencia.Atendido = Convert.ToInt32(result[11].ToString());
+                urgencia.Estado = Convert.ToInt32(result[12].ToString());
+                urgencia.IdArea = Convert.ToInt32(result[13].ToString());
+
+            }
+            return urgencia;
+        }
     }
 }
