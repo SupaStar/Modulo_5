@@ -17,7 +17,7 @@ namespace Modulo_5.Models
 
         [Required(ErrorMessage = "La descripcion es requerida.")]
         [Display(Name = "Describe tu sugerencia:")]
-        [MinLength(50, ErrorMessage = "La longitud minima de la sugerencia es de 50 caracteres.")]
+        [MinLength(25, ErrorMessage = "La longitud minima de la sugerencia es de 25 caracteres.")]
         public string Descripcion { get; set; }
         public int Estado { get; set; }
         public string Token { get; set; }

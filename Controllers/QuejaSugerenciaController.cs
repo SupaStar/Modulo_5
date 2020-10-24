@@ -14,7 +14,7 @@ namespace Modulo_5.Controllers
     {
         QuejaService _quejaServ;
         SugerenciaService _sugServ;
-
+        private MensajeModel mensaje = new MensajeModel();
         public QuejaSugerenciaController(IConfiguration conf)
         {
             _quejaServ = new QuejaService(conf);
@@ -39,14 +39,16 @@ namespace Modulo_5.Controllers
         {
             if (ModelState.IsValid)
             {
-                _quejaServ.AddQueja(queja);
-                //TODO Mandar correo con el token
-                return RedirectToAction("Index", "Home");
+                mensaje = _quejaServ.AddQueja(queja);
+                if (mensaje.Estado)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                ViewBag.errores = mensaje.Detalle;
             }
             List<TipoQueja> tipos = _quejaServ.cargarTipos();
             ViewBag.tipos = tipos.Select(x => new SelectListItem() { Text = x.Nombre, Value = x.Id.ToString() });
             return View("AgregarQueja");
-
         }
         public ActionResult addSugerencia(SugerenciaModel sugerencia)
         {
@@ -61,12 +63,24 @@ namespace Modulo_5.Controllers
         public ActionResult ValidarSugerencia(int idS, int idE)
         {
             _sugServ.validateSugerencia(idS, idE);
+            //TODO Mandar correo confirmacion
             return RedirectToAction("VistaSugerencias", "Admin");
         }
         public ActionResult VerSugerencia(int id)
         {
             ViewBag.sugerencia = _sugServ.FindSugerencia(id);
-            return View("Vers");
+            return View("VerS");
+        }
+        public ActionResult verQueja(int id)
+        {
+            ViewBag.queja = _quejaServ.FindQueja(id);
+            return View("VerQ");
+        }
+        public ActionResult ValidarQueja(int idQ, int idE)
+        {
+            _quejaServ.validateQueja(idQ, idE);
+            //TODO Mandar correo confirmacion
+            return RedirectToAction("VistaSugerencias", "Admin");
         }
     }
 }

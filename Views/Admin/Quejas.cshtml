@@ -1,3 +1,48 @@
 ﻿@{
     Layout = "~/Views/Shared/Admin/_Layout.cshtml";
+    List<QuejaModel> quejas = ViewBag.quejas;
 }
+<table class="table table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Urgencia Id</th>
+            <th scope="col">Email</th>
+            <th scope="col">Id tipo Queja</th>
+            <th scope="col">Descripcion</th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (quejas != null)
+        {
+            @foreach (QuejaModel queja in quejas)
+            {
+                <tr>
+                    <td>@queja.Id</td>
+                    <td>@queja.Id_urgencia</td>
+                    <td>@queja.Email</td>
+                    <td>@queja.Id_tipo_queja</td>
+                    <td>
+                        @if (queja.Descripcion.Length >= 50)
+                        {
+                            @for (int i = 0; i <= 50; i++)
+                            {
+                                @queja.Descripcion[i]
+                            }
+                        }
+                        else
+                        {
+                            @queja.Descripcion
+                        }
+                    </td>
+                    <td>
+                        <a target="_blank" asp-route-id="@queja.Id" asp-controller="QuejaSugerencia" asp-action="verQueja" type="button" class="btn btn-secondary" aria-label="Ver">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
