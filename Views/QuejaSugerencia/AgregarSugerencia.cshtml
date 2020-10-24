@@ -1,0 +1,34 @@
+﻿@model SugerenciaModel
+
+@{
+}
+
+<section class="jumbotron">
+    <h1 class="display-4">Mandar una sugerencia</h1>
+    @using (Html.BeginForm("addSugerencia", "QuejaSugerencia", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group row">
+            @Html.LabelFor(x => x.Email, new { @class = "col-sm-4 col-form-label" })
+            <div class="col">
+                @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "name@example.com", autofocus = "autofocus" })
+                @Html.ValidationMessageFor(x => x.Email, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(x => x.Descripcion, new { @class = "col-sm-4 col-form-label" })
+            <div class="col">
+                @Html.TextAreaFor(x => x.Descripcion, new { @class = "form-control", rows = "5" })
+                @Html.ValidationMessageFor(x => x.Descripcion, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col">
+                <button type="submit" class="btn btn-success btn-block">Confirmar</button>
+            </div>
+            <div class="col">
+                <button type="reset" class="btn btn-danger btn-block">Cancelar</button>
+            </div>
+        </div>
+    }
+</section>

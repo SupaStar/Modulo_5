@@ -102,7 +102,6 @@ namespace Modulo_5.Services
                 urgencia.Atendido = Convert.ToInt32(result[11].ToString());
                 urgencia.Estado = Convert.ToInt32(result[12].ToString());
                 urgencia.IdArea = Convert.ToInt32(result[13].ToString());
-
             }
             return urgencia;
         }
@@ -140,7 +139,7 @@ namespace Modulo_5.Services
         {
             MySqlConnection conn = conexion.conectar();
             string sqlInsert = "UPDATE urgencia SET nombre=@p1,ap_paterno=@p2,ap_materno=@p3,telefono=@p4,telefonoF=@p5," +
-                "email=@p6,fecha_nac=@p7,nss=@p8,descripcion=@p9,token=@p10,atendido=@p11,estado=@p12,id_area=@p13 " +
+                "email=@p6,fecha_nac=@p7,nss=@p8,descripcion=@p9,atendido=@p10,estado=@p11,id_area=@p12 " +
                 "where id=@p14";
             MySqlCommand m = conn.CreateCommand();
             m.CommandText = sqlInsert;
@@ -153,11 +152,10 @@ namespace Modulo_5.Services
             m.Parameters.AddWithValue("@p7", urgenciaItem.Fecha_nac);
             m.Parameters.AddWithValue("@p8", urgenciaItem.Nss);
             m.Parameters.AddWithValue("@p9", urgenciaItem.Descripcion);
-            m.Parameters.AddWithValue("@p10", urgenciaItem.Token);
-            m.Parameters.AddWithValue("@p11", urgenciaItem.Atendido);
-            m.Parameters.AddWithValue("@p12", urgenciaItem.Estado);
-            m.Parameters.AddWithValue("@p13", urgenciaItem.IdArea);
-            m.Parameters.AddWithValue("@p14", urgenciaItem.Id);
+            m.Parameters.AddWithValue("@p10", urgenciaItem.Atendido);
+            m.Parameters.AddWithValue("@p11", urgenciaItem.Estado);
+            m.Parameters.AddWithValue("@p12", urgenciaItem.IdArea);
+            m.Parameters.AddWithValue("@p13", urgenciaItem.Id);
             m.ExecuteNonQuery();
             conn.Close();
             return urgenciaItem;

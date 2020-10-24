@@ -1,0 +1,35 @@
+﻿@model Modulo_5.Models.SugerenciaModel
+
+@{
+    SugerenciaModel sugerencia = ViewBag.sugerencia;
+    ViewData["Title"] = "VerS";
+    Layout = "~/Views/Shared/Admin/_Layout.cshtml";
+    string estado = sugerencia.Estado == 1 ? "Activo" : "Inactivo";
+}
+
+<section class="jumbotron container-fluid">
+    <div class="form-group row">
+        <label class="col-sm-4 col-form-label" for="Id">ID</label>
+        <div class="col">
+            <input readonly id="Id" class="form-control" value="@sugerencia.Id" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-4 col-form-label" for="Email">@Html.DisplayNameFor(model => sugerencia.Email)</label>
+        <div class="col-6">
+            <input readonly id="Email" class="form-control" value="@sugerencia.Email" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-4 col-form-label" for="Descripcion">@Html.DisplayNameFor(model => sugerencia.Descripcion)</label>
+        <div class="col">
+            <textarea readonly id="Descripcion" class="form-control" rows="6">@sugerencia.Descripcion</textarea>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-4 col-form-label" for="Estado">@Html.DisplayNameFor(model => sugerencia.Estado)</label>
+        <div class="col">
+            <input readonly id="Estado" class="form-control" value="@estado" />
+        </div>
+    </div>
+</section>

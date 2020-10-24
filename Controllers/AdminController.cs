@@ -11,11 +11,13 @@ namespace Modulo_5.Controllers
     {
         SesionService _service;
         private UrgenciasService _serviceUrg;
+        private SugerenciaService _serviceSug;
         string sesion;
         public AdminController(IConfiguration conf)
         {
             this._service = new SesionService(conf);
             this._serviceUrg = new UrgenciasService(conf);
+            this._serviceSug = new SugerenciaService(conf);
         }
         public void CargarSesion()
         {
@@ -79,7 +81,25 @@ namespace Modulo_5.Controllers
             }
             return RedirectToAction("Login", "Admin");
         }
-        
-        //TODO hacer vistas para las sugerencias
+        public IActionResult VistaSugerencias()
+        {
+            CargarSesion();
+            if (this.sesion != null)
+            {
+                ViewBag.sugerencias = _serviceSug.GetSugerencias();
+                return View("Sugerencias");
+            }
+            return RedirectToAction("Login", "Admin");
+        }
+        public IActionResult ValidarSugerencia(int id)
+        {
+            CargarSesion();
+            if (this.sesion != null)
+            {
+                return RedirectToAction("ValidarSugerencia", "QuejaSugerencia", new { idS = id, idE = sesion });
+            }
+            return RedirectToAction("Login", "Admin");
+        }
+        //TODO hacer vistas para las quejas
     }
 }
