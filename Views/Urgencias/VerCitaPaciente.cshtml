@@ -5,28 +5,30 @@
     Layout = "~/Views/Shared/Admin/_Layout.cshtml";
     UrgenciaModel urgencia = ViewBag.urgencia;
 }
-    <table class="table table-responsive-lg jumbotron-fluid">
-        <thead>
-            <tr>
-                <td scope="col">Nombre</td>
-                <td scope="col">Telefono</td>
-                <td scope="col">Fecha consulta</td>
-                <td scope="col">NSS</td>
-                
-            </tr>
-        </thead>
-        <tbody>
-            @if (urgencia != null)
-            {
-               
+    <section class="jumbotron justify-content-md-end">
+        <table class="table table-responsive-lg jumbotron-fluid">
+            <thead>
+                <tr>
+                    <td scope="col">Nombre</td>
+                    <td scope="col">Telefono</td>
+                    <td scope="col">Fecha consulta</td>
+                    <td scope="col">NSS</td>
+
+                </tr>
+            </thead>
+            <tbody>
+                @if (urgencia != null)
+                {
+
                     <tr>
                         <td>@urgencia.Nombre @urgencia.Ap_paterno @urgencia.Ap_materno</td>
                         <td>@urgencia.Telefono</td>
                         <td>@urgencia.Fecha_nac.ToShortDateString()</td>
                         <td>@urgencia.Nss</td>
-                        
+
                     </tr>
-                
-            }
-        </tbody>
-    </table>
+
+                }
+            </tbody>
+        </table>
+    </section>
