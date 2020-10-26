@@ -5,9 +5,10 @@
     Layout = "~/Views/Shared/Admin/_Layout.cshtml";
     List<UrgenciaModel> urgencias = ViewBag.urgencias;
 }
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
 <a asp-controller="Admin" asp-action="IniciarS">Iniciar</a>
 <a asp-controller="Admin" asp-action="VerSesion">Ver</a>
-<table class="table table-bordered">
+<table class="table table-bordered" id="urgencias">
     <thead class="thead-dark">
         <tr>
             <th scope="col">ID</th>
@@ -42,3 +43,25 @@
         }
     </tbody>
 </table>
+@section scripts{
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#urgencias').DataTable({
+                language: {
+                    "emptyTable": "No hay registros que atender",
+                    "search": "Buscar:",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "lengthMenu": "Mostrar _MENU_ registros",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+        });
+    </script>
+}
