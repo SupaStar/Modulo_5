@@ -121,5 +121,19 @@ namespace Modulo_5.Controllers
             }
             return RedirectToAction("Login", "Admin");
         }
+        public IActionResult ValidarUrgencia(int id)
+        {
+            //TODO hacer que se envien los empleados al select
+            CargarSesion();
+            if (this.sesion != null)
+            {
+                return RedirectToAction("ValidarUrgencia", "Urgencias", new { idU = id, idE = sesion });
+            }
+            return RedirectToAction("Login", "Admin");
+        }
+        public IActionResult CerrarPestaña()
+        {
+            return View("Cerrar");
+        }
     }
 }

@@ -4,7 +4,7 @@
 @{
     QuejaModel queja = ViewBag.queja;
     ViewData["Title"] = "Ver Sugerencia";
-    Layout = "~/Views/Shared/Admin/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
     string estado = queja.Estado == 1 ? "No validada" : "Validada";
 }
 <section class="jumbotron container-fluid">
@@ -38,5 +38,4 @@
             <input readonly id="Estado" class="form-control" value="@estado" />
         </div>
     </div>
-    <a class="btn btn-success" asp-route-id="@queja.Id" asp-controller="Admin" asp-action="ValidarQueja">Validar Queja</a>
 </section>

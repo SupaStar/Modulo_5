@@ -153,7 +153,7 @@ namespace Modulo_5.Services
             }
             return queja;
         }
-        public bool validateQueja(int idQ, int idE)
+        public QuejaModel validateQueja(int idQ, int idE)
         {
             MySqlConnection conn = conexion.conectar();
             string sql = "INSERT INTO queja_empleado VALUES(null,@p1,@p2)";
@@ -162,9 +162,9 @@ namespace Modulo_5.Services
             m.Parameters.AddWithValue("@p1", idQ);
             m.Parameters.AddWithValue("@p2", idE);
             m.ExecuteNonQuery();
-            Boolean estado = true;
             this.DeleteQueja(idQ);
-            return estado;
+            QuejaModel queja = this.FindQueja(idQ);
+            return queja;
         }
     }
 }

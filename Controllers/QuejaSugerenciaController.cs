@@ -14,9 +14,11 @@ namespace Modulo_5.Controllers
     {
         QuejaService _quejaServ;
         SugerenciaService _sugServ;
+        private CorreosModel correo;
         private MensajeModel mensaje = new MensajeModel();
         public QuejaSugerenciaController(IConfiguration conf)
         {
+            correo = new CorreosModel();
             _quejaServ = new QuejaService(conf);
             _sugServ = new SugerenciaService(conf);
         }
@@ -42,6 +44,10 @@ namespace Modulo_5.Controllers
                 mensaje = _quejaServ.AddQueja(queja);
                 if (mensaje.Estado)
                 {
+                    correo.Asunto = "Registro de su Queja";
+                    correo.Destinatario = queja.Email;
+                    correo.Contenido = "Gracias por su queja, puede consultarla en el siguiente link <a href='https://localhost:44381/QuejaSugerencia/VerQuejaUsuario/" + queja.Token + "'>Ver queja</a>";
+                    correo.Enviar();
                     return RedirectToAction("Index", "Home");
                 }
                 ViewBag.errores = mensaje.Detalle;
@@ -55,22 +61,29 @@ namespace Modulo_5.Controllers
             if (ModelState.IsValid)
             {
                 _sugServ.AddSugerencia(sugerencia);
-                //TODO Mandar correo con el token
+                correo.Asunto = "Registro de su Sugerencia";
+                correo.Destinatario = sugerencia.Email;
+                correo.Contenido = "Gracias por su sugerencia, puede consultarla en el siguiente link <a href='https://localhost:44381/QuejaSugerencia/VerSugerenciaUsuario/" + sugerencia.Token + "'>Ver sugerencia</a>";
+                correo.Enviar();
                 return RedirectToAction("Index", "Home");
             }
             return View("AgregarSugerencia");
         }
         public ActionResult ValidarSugerencia(int idS, int idE)
         {
-            _sugServ.validateSugerencia(idS, idE);
-            //TODO Mandar correo confirmacion
-            return RedirectToAction("VistaSugerencias", "Admin");
+            SugerenciaModel sugerencia = _sugServ.validateSugerencia(idS, idE);
+            correo.Asunto = "Sugerencia validada";
+            correo.Destinatario = sugerencia.Email;
+            correo.Contenido = "Gracias por su sugerencia, esta ya fue procesada, puedes verla en el siguiente link <a href='https://localhost:44381/QuejaSugerencia/VerSugerenciaUsuario/" + sugerencia.Token + "'>Ver sugerencia</a>";
+            correo.Enviar();
+            return RedirectToAction("CerrarPestaña", "Admin");
         }
         public ActionResult VerSugerencia(int id)
         {
             ViewBag.sugerencia = _sugServ.FindSugerencia(id);
             return View("VerS");
         }
+
         public ActionResult verQueja(int id)
         {
             ViewBag.queja = _quejaServ.FindQueja(id);
@@ -78,9 +91,22 @@ namespace Modulo_5.Controllers
         }
         public ActionResult ValidarQueja(int idQ, int idE)
         {
-            _quejaServ.validateQueja(idQ, idE);
-            //TODO Mandar correo confirmacion
-            return RedirectToAction("VistaSugerencias", "Admin");
+            QuejaModel queja = _quejaServ.validateQueja(idQ, idE);
+            correo.Asunto = "Queja validada";
+            correo.Destinatario = queja.Email;
+            correo.Contenido = "Gracias por su queja, esta ya fue procesada, puedes verla en el siguiente link <a href='https://localhost:44381/QuejaSugerencia/VerQuejaUsuario/" + queja.Token + "'>Ver queja</a>";
+            correo.Enviar();
+            return RedirectToAction("CerrarPestaña", "Admin");
+        }
+        public ActionResult VerSugerenciaUsuario(string id)
+        {
+            ViewBag.sugerencia = _sugServ.FindSugerenciaByToken(id);
+            return View("Usuario/VerSugerencia");
+        }
+        public ActionResult VerQuejaUsuario(string id)
+        {
+            ViewBag.queja = _quejaServ.FindQuejaByToken(id);
+            return View("Usuario/VerQueja");
         }
     }
 }

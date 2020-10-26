@@ -127,7 +127,7 @@ namespace Modulo_5.Services
             return sugerencia;
         }
 
-        public bool validateSugerencia(int idS, int idE)
+        public SugerenciaModel validateSugerencia(int idS, int idE)
         {
             MySqlConnection conn = conexion.conectar();
             string sql = "INSERT INTO sugerencia_empleado VALUES(null,@p1,@p2)";
@@ -136,9 +136,9 @@ namespace Modulo_5.Services
             m.Parameters.AddWithValue("@p1", idS);
             m.Parameters.AddWithValue("@p2", idE);
             m.ExecuteNonQuery();
-            Boolean estado = true;
             this.DeleteSugerencia(idS);
-            return estado;
+            SugerenciaModel sugerencia = this.FindSugerencia(idS);
+            return sugerencia;
         }
     }
 }

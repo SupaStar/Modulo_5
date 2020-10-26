@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using MailKit.Net.Smtp;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using MimeKit;
-using MimeKit.Text;
 using Modulo_5.Models;
 using Modulo_5.Services;
 
@@ -17,8 +10,10 @@ namespace Modulo_5.Controllers
     {
         private ILogger _logger;
         private UrgenciasService _service;
+        private CorreosModel correo;
         public UrgenciasController(ILogger<UrgenciasController> logger, IConfiguration conf)
         {
+            correo = new CorreosModel();
             _logger = logger;
             _service = new UrgenciasService(conf);
         }
@@ -36,31 +31,10 @@ namespace Modulo_5.Controllers
             if (ModelState.IsValid)
             {
                 _service.AddUrgencia(u);
-                try
-                {
-                    var mensaje = new MimeMessage();
-                    mensaje.To.Add(new MailboxAddress("Para: ", u.Email));
-                    mensaje.From.Add(new MailboxAddress("Modulo de Urgencias", "from@domail.com"));
-                    mensaje.Subject = "Registro de Urgencias";
-                    string token = u.Token;
-                    mensaje.Body = new TextPart(TextFormat.Html)
-                    {
-                        //Text = "Hola " + u.Nombre + " Se notifica su registro en la fecha: " + u.Fecha_nac + "<br> <a asp-route-token="+ string.Format(@""+ u.Token + "")+" asp-action='VerCitaPaciente' asp-controller='Urgencias' href=" + string.Format(@"https://localhost:44381/Urgencias/VerCitaPaciente/")+">"+ "Ver Cita"+"</a>"
-                        Text = "Hola " + u.Nombre + " Se notifica su registro en la fecha: " + u.Fecha_nac + "<br>" +
-                        "<a href='https://localhost:44381/Urgencias/VerCitaPaciente/" + u.Token + "'>Ver Cita</a>"
-                    };
-                    using (var emailClient = new SmtpClient())
-                    {
-                        emailClient.Connect("smtp.gmail.com", 587, false);
-                        emailClient.Authenticate("pruebasmodulo5cetis@gmail.com", "Ulisestortuga1");
-                        emailClient.Send(mensaje);
-                        emailClient.Disconnect(true);
-                    }
-                }
-                catch
-                {
-
-                }
+                correo.Asunto = "Registro urgencia";
+                correo.Destinatario = u.Email;
+                correo.Contenido = "Hola " + u.Nombre + " Se notifica su registro en la fecha: " + u.Fecha_nac + "<br><a href='https://localhost:44381/Urgencias/VerCitaPaciente/" + u.Token + "'>Ver Cita</a>";
+                correo.Enviar();
                 return RedirectToAction("Index", "Home");
             }
             ViewBag.areas = _service.getAreas();
@@ -94,6 +68,15 @@ namespace Modulo_5.Controllers
         {
             ViewBag.urgencia = _service.ViewUrgencia(id);
             return View();
+        }
+        public ActionResult ValidarUrgencia(int idU, int idE)
+        {
+            UrgenciaModel urgencia = _service.validateUrgencia(idU, idE);
+            correo.Asunto = "Urgencia aceptada";
+            correo.Destinatario = urgencia.Email;
+            correo.Contenido = "Hola " + urgencia.Nombre + " Se notifica que su urgencia fue aceptada, ver en el siguiente link:<a href='https://localhost:44381/Urgencias/VerCitaPaciente/" + urgencia.Token + "'>Ver Cita</a>";
+            correo.Enviar();
+            return RedirectToAction("VistaSugerencias", "Admin");
         }
     }
 }

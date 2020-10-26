@@ -12,7 +12,7 @@ namespace Modulo_5.Services.Interfaces
         public SugerenciaModel AddSugerencia(SugerenciaModel sugerenciaItem);
         public SugerenciaModel UpdateSugerencia(int id, SugerenciaModel sugerenciaItem);
         public Boolean DeleteSugerencia(int id);
-        public Boolean validateSugerencia(int idS,int idE);
+        public SugerenciaModel validateSugerencia(int idS,int idE);
         public SugerenciaModel FindSugerencia(int id);
         public SugerenciaModel FindSugerenciaByToken(string token);
     }

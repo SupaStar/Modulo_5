@@ -75,6 +75,12 @@ namespace Modulo_5
                 endpoints.MapControllerRoute(
                     name: "citaUsuario",
                     pattern: "{controller=Urgencias}/{action=VerCitaPaciente}/{id}");
+                endpoints.MapControllerRoute(
+                    name: "sugerenciaUsuario",
+                    pattern: "{controller=QuejaSugerencia}/{action=VerSugerenciaUsuario}/{id}");
+                endpoints.MapControllerRoute(
+                    name: "quejaUsuario",
+                    pattern: "{controller=QuejaSugerencia}/{action=VerQuejaUsuario}/{id}");
             });
         }
     }

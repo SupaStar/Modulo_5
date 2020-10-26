@@ -14,6 +14,6 @@ namespace Modulo_5.Services.Interfaces
         public Boolean DeleteQueja(int id);
         public QuejaModel FindQueja(int id);
         public QuejaModel FindQuejaByToken(string token);
-        public bool validateQueja(int idS, int idE);
+        public QuejaModel validateQueja(int idQ, int idE);
     }
 }

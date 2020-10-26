@@ -3,7 +3,7 @@
 @{
     SugerenciaModel sugerencia = ViewBag.sugerencia;
     ViewData["Title"] = "Ver Sugerencia";
-    Layout = "~/Views/Shared/Admin/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
     string estado = sugerencia.Estado == 1 ? "No validada" : "Validada";
 }
 
@@ -32,5 +32,4 @@
             <input readonly id="Estado" class="form-control" value="@estado" />
         </div>
     </div>
-    <a class="btn btn-success" asp-route-id="@sugerencia.Id" asp-controller="Admin" asp-action="ValidarSugerencia">Validar Sugerencia</a>
 </section>

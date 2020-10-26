@@ -189,5 +189,20 @@ namespace Modulo_5.Services
             }
             return urgencia;
         }
+
+        public UrgenciaModel validateUrgencia(int idU, int idE)
+        {
+            MySqlConnection conn = conexion.conectar();
+            string sql = "INSERT INTO urgencias_empleado VALUES(null,@p1,@p2)";
+            MySqlCommand m = conn.CreateCommand();
+            m.CommandText = sql;
+            m.Parameters.AddWithValue("@p1", idU);
+            m.Parameters.AddWithValue("@p2", idE);
+            m.ExecuteNonQuery();
+            Boolean estado = true;
+            this.DeleteUrgencia(idU);
+            UrgenciaModel urgencia = this.FindUrgencia(idU);
+            return urgencia;
+        }
     }
 }
