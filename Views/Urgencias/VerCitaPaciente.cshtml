@@ -2,32 +2,31 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    Layout = "~/Views/Shared/Admin/_Layout.cshtml";
     UrgenciaModel urgencia = ViewBag.urgencia;
 }
-    <form>
-        <div class="row">
-            <div class="col-lg-6">
-                <label for="Id">Id</label>
-            </div>
-            <div class="col-lg-6">
-                <input id="Id" name="Id" type="text" disabled value="@urgencia.Id" />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <label for="Nombre">Nombre</label>
-            </div>
-            <div class="col-lg-6">
-                <input id="Nombre" name="Nombre" type="text" value="@urgencia.Telefono" />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-6">
-                <label for="Tipo">Tipo</label>
-            </div>
-            <div class="col-lg-6">
-                <input id="Tipo" name="Tipo" type="text" value="@urgencia.Fecha_nac" />
-            </div>
-        </div>
-       
-    </form>
+    <table class="table table-responsive-lg jumbotron-fluid">
+        <thead>
+            <tr>
+                <td scope="col">Nombre</td>
+                <td scope="col">Telefono</td>
+                <td scope="col">Fecha consulta</td>
+                <td scope="col">NSS</td>
+                
+            </tr>
+        </thead>
+        <tbody>
+            @if (urgencia != null)
+            {
+               
+                    <tr>
+                        <td>@urgencia.Nombre @urgencia.Ap_paterno @urgencia.Ap_materno</td>
+                        <td>@urgencia.Telefono</td>
+                        <td>@urgencia.Fecha_nac.ToShortDateString()</td>
+                        <td>@urgencia.Nss</td>
+                        
+                    </tr>
+                
+            }
+        </tbody>
+    </table>
