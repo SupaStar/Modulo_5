@@ -48,6 +48,8 @@ namespace Modulo_5.Controllers
         {
             //TODO terminar formulario
             ViewBag.areas = _service.getAreas();
+            ViewBag.empleados = _service.getEmpleados();
+
             ViewBag.urgencia = _service.FindUrgencia(id);
             return View();
         }

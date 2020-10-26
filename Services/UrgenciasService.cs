@@ -12,6 +12,7 @@ namespace Modulo_5.Services
     {
         private List<UrgenciaModel> _urgenciasItems;
         private List<AreaModel> areas;
+        private List<EmpleadoModel> empleados;
         DbController conexion;
         private readonly IConfiguration _confi;
         Encriptador enc = new Encriptador();
@@ -39,6 +40,27 @@ namespace Modulo_5.Services
                 areas.Add(area);
             }
             return areas;
+        }
+        public List<EmpleadoModel> getEmpleados()
+        {
+            MySqlConnection conn = conexion.conectar();
+            string sql = "SELECT * FROM empleado";
+            MySqlCommand m = conn.CreateCommand();
+            m.CommandText = sql;
+            MySqlDataReader result = m.ExecuteReader();
+            while (result.Read())
+            {
+                EmpleadoModel empleado = new EmpleadoModel();
+                empleado.Id = Convert.ToInt32(result[0].ToString());
+                empleado.Nombre = result[1].ToString();
+                empleado.Ap_paterno = result[2].ToString();
+                empleado.Ap_materno = result[3].ToString();
+                empleado.Correo = result[4].ToString();
+                empleado.Num_cel = Convert.ToInt32(result[5].ToString());
+                empleado.Num_cuenta = result[6].ToString();
+                empleados.Add(empleado);
+            }
+            return empleados;
         }
 
         public UrgenciaModel AddUrgencia(UrgenciaModel urgenciaItem)
