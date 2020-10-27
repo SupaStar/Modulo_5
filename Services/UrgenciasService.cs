@@ -22,6 +22,7 @@ namespace Modulo_5.Services
             _urgenciasItems = new List<UrgenciaModel>();
             areas = new List<AreaModel>();
             conexion = new DbController();
+            empleados = new List<EmpleadoModel>();
             conexion.conectionString = _confi.GetValue<string>("ConnectionStrings:Default");
         }
         public List<AreaModel> getAreas()

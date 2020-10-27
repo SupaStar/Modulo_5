@@ -47,6 +47,7 @@ namespace Modulo_5.Models
         [Required(ErrorMessage = "El area es requerida.")]
         [Display(Name = "Area")]
         public int IdArea { get; set; }
+        public int IdMedico { get; set; }
         public int Estado { get; set; }
         public int Atendido { get; set; }
         public string Token { get; set; }
