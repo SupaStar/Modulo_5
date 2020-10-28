@@ -58,7 +58,7 @@ namespace Modulo_5.Controllers
             if (ModelState.IsValid)
             {
                 _service.UpdateUrgencia(id,u);
-
+                return RedirectToAction("Index", "Home");
             }
             return View("Editar");
         }

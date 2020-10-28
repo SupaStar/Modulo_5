@@ -3,7 +3,7 @@
 *@
 @{
     UrgenciaModel u = ViewBag.urgencia;
-    //String Fecha = u.Fecha_nac.ToString("yyyy-MM-dd");
+  //  String Fecha = u.Fecha_nac.ToString("yyyy-MM-dd");
     List<AreaModel> areas = ViewBag.areas;
     List<EmpleadoModel> empleados = ViewBag.empleados;
     DateTime dt = DateTime.Now;
@@ -19,72 +19,72 @@
             <div class="form-group row">
                 @Html.LabelFor(u => u.Id, new { @class = "col-sm-4 col-form-label" })
                 <div class="col">
-                    @Html.TextBoxFor(u => u.Id,
-                   new { @class = "form-control", placeholder = "Id.", disabled = "disabled", value = u.Id, autofocus = "autofocus" })
-                    @Html.ValidationMessageFor(x => x.Id, null, new { @class = "text-danger" })
+                    @Html.TextBoxFor(u=>u.Id,
+                   new { @class = "form-control", placeholder = "Id.", disabled = "disabled", autofocus = "autofocus" })
+                    @Html.ValidationMessageFor(u => u.Id, null, new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group row">
                 @Html.LabelFor(u => u.Nombre, new { @class = "col-sm-4 col-form-label" })
                 <div class="col">
-                    @Html.TextBox("Nombre", u.Nombre, new { @class = "form-control", disabled = "disabled", placeholder = "Nombre.", autofocus = "autofocus" })
-                    @Html.ValidationMessageFor(x => x.Nombre, null, new { @class = "text-danger" })
+                    @Html.TextBoxFor(u => u.Nombre, new { @class = "form-control", disabled = "disabled", placeholder = "Nombre.", autofocus = "autofocus" })
+                    @Html.ValidationMessageFor(u => u.Nombre, null, new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group row">
                 @Html.LabelFor(u => u.Ap_paterno, new { @class = "col-sm-4 col-form-label" })
                 <div class="col">
-                    @Html.TextBox("Ap_paterno", u.Ap_paterno,
-                   new { @class = "form-control", placeholder = "Apellido paterno.", disabled = "disabled", value = u.Ap_paterno, autofocus = "autofocus" })
-                    @Html.ValidationMessageFor(x => x.Ap_paterno, null, new { @class = "text-danger" })
+                    @Html.TextBoxFor(u => u.Ap_paterno,
+                   new { @class = "form-control", placeholder = "Apellido paterno.", disabled = "disabled", autofocus = "autofocus" })
+                    @Html.ValidationMessageFor(u => u.Ap_paterno, null, new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group row">
                 @Html.LabelFor(u => u.Ap_materno, new { @class = "col-sm-4 col-form-label" })
                 <div class="col">
-                    @Html.TextBox("Ap_materno", u.Ap_materno,
-                  new { @class = "form-control", placeholder = "Apellido materno.", disabled = "disabled", value = u.Ap_materno, autofocus = "autofocus" })
-                    @Html.ValidationMessageFor(x => x.Ap_materno, null, new { @class = "text-danger" })
+                    @Html.TextBoxFor(u => u.Ap_materno,
+                  new { @class = "form-control", placeholder = "Apellido materno.", disabled = "disabled", autofocus = "autofocus" })
+                    @Html.ValidationMessageFor(u => u.Ap_materno, null, new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group row">
                 @Html.LabelFor(u => u.Telefono, new { @class = "col-sm-4 col-form-label" })
                 <div class="col">
-                    @Html.TextBox("Telefono", u.Telefono,
+                    @Html.TextBoxFor(u => u.Telefono,
                    new { @class = "form-control", type = "number", disabled = "disabled", placeholder = "0123456789" })
-                    @Html.ValidationMessageFor(x => x.Telefono, null, new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(u => u.Telefono, null, new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group row">
                 @Html.LabelFor(u => u.TelefonoF, new { @class = "col-sm-4 col-form-label" })
                 <div class="col">
-                    @Html.TextBox("TelefonoF", u.TelefonoF,
-                   new { @class = "form-control", type = "number", disabled = "disabled", value = u.TelefonoF, placeholder = "0123456789" })
-                    @Html.ValidationMessageFor(x => x.TelefonoF, null, new { @class = "text-danger" })
+                    @Html.TextBoxFor(u => u.TelefonoF,
+                   new { @class = "form-control", type = "number", disabled = "disabled", placeholder = "0123456789" })
+                    @Html.ValidationMessageFor(u => u.TelefonoF, null, new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group row">
                 @Html.LabelFor(u => u.Email, new { @class = "col-sm-4 col-form-label" })
                 <div class="col">
-                    @Html.TextBox("Email", u.Email,
-                   new { @class = "form-control", type = "text", disabled = "disabled", value = u.Email, placeholder = "name@example.com" })
-                    @Html.ValidationMessageFor(x => x.Email, null, new { @class = "text-danger" })
+                    @Html.TextBoxFor(u => u.Email,
+                   new { @class = "form-control", type = "text", disabled = "disabled", placeholder = "name@example.com" })
+                    @Html.ValidationMessageFor(u => u.Email, null, new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group row">
-                @Html.LabelFor(x => x.Fecha_nac, new { @class = "col-sm-4 col-form-label" })
+                @Html.LabelFor(u => u.Fecha_nac, new { @class = "col-sm-4 col-form-label" })
                 <div class="col">
-                    @Html.TextBoxFor(x => x.Fecha_nac,
+                    @Html.TextBoxFor(u => u.Fecha_nac,
                   new { @class = "form-control", type = "date", min = fechaMin, max = fechaMax, placeholder = "Fecha de nacimiento." })
-                    @Html.ValidationMessageFor(x => x.Fecha_nac, null, new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(u => u.Fecha_nac, null, new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group row">
                 @Html.LabelFor(u => u.Nss, new { @class = "col-sm-4 col-form-label" })
                 <div class="col">
-                    @Html.TextBox("Nss", u.Nss,
-                   new { @class = "form-control", type = "number", disabled = "disabled", value = u.Nss, placeholder = "123456789" })
-                    @Html.ValidationMessageFor(x => x.Nss, null, new { @class = "text-danger" })
+                    @Html.TextBoxFor(u=>u.Nss,
+                   new { @class = "form-control",type = "number", disabled = "disabled", placeholder = "123456789" })
+                    @Html.ValidationMessageFor(u => u.Nss, null, new { @class = "text-danger" })
                 </div>
             </div>
             <div class="form-group row">
@@ -93,7 +93,7 @@
                     <select id="IdArea" name="IdArea" class="form-control" required>
                         @foreach (AreaModel area in areas)
                         {
-                            <option selected=@u.IdArea value="@area.Id">@area.Nombre</option>
+                            <option >@area.Nombre</option>
                         }
                     </select>
                 </div>
@@ -110,11 +110,11 @@
                 </div>
             </div>
             <div class="form-group row">
-                @Html.LabelFor(x => x.Descripcion, new { @class = "col-sm-4 col-form-label" })
+                @Html.LabelFor(u => u.Descripcion, new { @class = "col-sm-4 col-form-label" })
                 <div class="col">
-                    @Html.TextArea("Descripcion", u.Descripcion,
+                    @Html.TextAreaFor(u => u.Descripcion,
                    new { @class = "form-control", disabled = "disabled", placeholder = "Descripcion-" })
-                    @Html.ValidationMessageFor(x => x.Descripcion, null, new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(u => u.Descripcion, null, new { @class = "text-danger" })
                 </div>
             </div>
             <div class="row justify-content-md-center">
