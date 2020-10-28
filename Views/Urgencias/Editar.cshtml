@@ -3,7 +3,7 @@
 *@
 @{
     UrgenciaModel u = ViewBag.urgencia;
-    String Fecha = u.Fecha_nac.ToString("yyyy-MM-dd");
+    //String Fecha = u.Fecha_nac.ToString("yyyy-MM-dd");
     List<AreaModel> areas = ViewBag.areas;
     List<EmpleadoModel> empleados = ViewBag.empleados;
     DateTime dt = DateTime.Now;
@@ -72,10 +72,10 @@
                 </div>
             </div>
             <div class="form-group row">
-                @Html.LabelFor(u => Fecha, new { @class = "col-sm-4 col-form-label" })
+                @Html.LabelFor(x => x.Fecha_nac, new { @class = "col-sm-4 col-form-label" })
                 <div class="col">
-                    @Html.TextBox("Fecha_nac", Fecha,
-                   new { @class = "form-control", type = "date", placeholder = "Fecha de nacimiento." })
+                    @Html.TextBoxFor(x => x.Fecha_nac,
+                  new { @class = "form-control", type = "date", min = fechaMin, max = fechaMax, placeholder = "Fecha de nacimiento." })
                     @Html.ValidationMessageFor(x => x.Fecha_nac, null, new { @class = "text-danger" })
                 </div>
             </div>

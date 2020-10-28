@@ -53,10 +53,11 @@ namespace Modulo_5.Controllers
             ViewBag.urgencia = _service.FindUrgencia(id);
             return View();
         }
-        public ActionResult Update(UrgenciaModel u)
+        public ActionResult Update(int id,UrgenciaModel u)
         {
             if (ModelState.IsValid)
             {
+                _service.UpdateUrgencia(id,u);
 
             }
             return View("Editar");
