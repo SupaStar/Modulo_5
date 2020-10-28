@@ -13,7 +13,7 @@
 @model UrgenciaModel
 
     <section>
-        @using (Html.BeginForm("Editar", "Urgencias", FormMethod.Post))
+        @using (Html.BeginForm("Update", "Urgencias", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
             <div class="form-group row">
