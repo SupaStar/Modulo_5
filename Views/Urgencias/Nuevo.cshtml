@@ -9,7 +9,7 @@
     List<AreaModel> areas = ViewBag.areas;
 }
 @model UrgenciaModel
-<section>
+<section  id="seccionlogin">
     @using (Html.BeginForm("Create", "Urgencias", FormMethod.Post))
     {
         @Html.AntiForgeryToken()

@@ -2,6 +2,7 @@
     Layout = "~/Views/Shared/Admin/_Layout.cshtml";
     List<QuejaModel> quejas = ViewBag.quejas;
 }
+<section  id="seccionlogin">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
 <table class="table table-bordered" id="Quejas">
     <thead class="thead-dark">
@@ -47,6 +48,7 @@
         }
     </tbody>
 </table>
+    </section>
 @section scripts{
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
     <script>

@@ -5,6 +5,7 @@
     Layout = "~/Views/Shared/Admin/_Layout.cshtml";
     List<UrgenciaModel> urgencias = ViewBag.urgencias;
 }
+<section  id="seccionlogin">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
 <a asp-controller="Admin" asp-action="IniciarS">Iniciar</a>
 <a asp-controller="Admin" asp-action="VerSesion">Ver</a>
@@ -43,6 +44,7 @@
         }
     </tbody>
 </table>
+    </section>
 @section scripts{
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
     <script>
