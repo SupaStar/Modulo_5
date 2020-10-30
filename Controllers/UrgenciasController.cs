@@ -83,7 +83,7 @@ namespace Modulo_5.Controllers
             correo.Destinatario = urgencia.Email;
             correo.Contenido = "Hola " + urgencia.Nombre + " Se notifica que su urgencia fue aceptada, ver en el siguiente link:<a href='https://localhost:44381/Urgencias/VerCitaPaciente/" + urgencia.Token + "'>Ver Cita</a>";
             correo.Enviar();
-            return RedirectToAction("VistaSugerencias", "Admin");
+            return RedirectToAction("CerrarPestannia", "Admin");
         }
     }
 }

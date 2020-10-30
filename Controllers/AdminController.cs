@@ -131,7 +131,7 @@ namespace Modulo_5.Controllers
             }
             return RedirectToAction("Login", "Admin");
         }
-        public IActionResult CerrarPestaña()
+        public IActionResult CerrarPestannia()
         {
             return View("Cerrar");
         }

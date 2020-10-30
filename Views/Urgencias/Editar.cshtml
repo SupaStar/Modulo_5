@@ -3,11 +3,11 @@
 *@
 @{
     UrgenciaModel u = ViewBag.urgencia;
-    //  String Fecha = u.Fecha_nac.ToString("yyyy-MM-dd");
     List<AreaModel> areas = ViewBag.areas;
     List<EmpleadoModel> empleados = ViewBag.empleados;
     DateTime dt = DateTime.Now;
     String fechaMin = dt.ToString("yyyy-MM-dd");
+    dt=dt.AddDays(7);
     String fechaMax = dt.ToString("yyyy-MM-dd");
 }
 @model UrgenciaModel
@@ -61,9 +61,7 @@
         <div class="form-group row">
             @Html.LabelFor(u => u.Fecha_nac, new { @class = "col-sm-4 col-form-label" })
             <div class="col">
-                @Html.TextBoxFor(u => u.Fecha_nac,
-              new { @class = "form-control", type = "date", min = fechaMin, max = fechaMax, placeholder = "Fecha de nacimiento." })
-                @Html.ValidationMessageFor(u => u.Fecha_nac, null, new { @class = "text-danger" })
+                <input readonly name="Fecha_nac" value="@u.Fecha_nac.ToString("yyyy-MM-dd")" class="form-control" type="date" min="@fechaMin" max="@fechaMax" />
             </div>
         </div>
         <div class="form-group row">

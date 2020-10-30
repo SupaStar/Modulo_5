@@ -76,7 +76,7 @@ namespace Modulo_5.Controllers
             correo.Destinatario = sugerencia.Email;
             correo.Contenido = "Gracias por su sugerencia, esta ya fue procesada, puedes verla en el siguiente link <a href='https://localhost:44381/QuejaSugerencia/VerSugerenciaUsuario/" + sugerencia.Token + "'>Ver sugerencia</a>";
             correo.Enviar();
-            return RedirectToAction("CerrarPestaña", "Admin");
+            return RedirectToAction("CerrarPestannia", "Admin");
         }
         public ActionResult VerSugerencia(int id)
         {
@@ -96,7 +96,7 @@ namespace Modulo_5.Controllers
             correo.Destinatario = queja.Email;
             correo.Contenido = "Gracias por su queja, esta ya fue procesada, puedes verla en el siguiente link <a href='https://localhost:44381/QuejaSugerencia/VerQuejaUsuario/" + queja.Token + "'>Ver queja</a>";
             correo.Enviar();
-            return RedirectToAction("CerrarPestaña", "Admin");
+            return RedirectToAction("CerrarPestannia", "Admin");
         }
         public ActionResult VerSugerenciaUsuario(string id)
         {
