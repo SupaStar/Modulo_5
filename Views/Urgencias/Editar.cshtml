@@ -3,7 +3,7 @@
 *@
 @{
     UrgenciaModel u = ViewBag.urgencia;
-  //  String Fecha = u.Fecha_nac.ToString("yyyy-MM-dd");
+    //  String Fecha = u.Fecha_nac.ToString("yyyy-MM-dd");
     List<AreaModel> areas = ViewBag.areas;
     List<EmpleadoModel> empleados = ViewBag.empleados;
     DateTime dt = DateTime.Now;
@@ -12,115 +12,113 @@
 }
 @model UrgenciaModel
 
-    <section>
-        @using (Html.BeginForm("Update", "Urgencias", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-            <div class="form-group row">
-                @Html.LabelFor(u => u.Id, new { @class = "col-sm-4 col-form-label" })
-                <div class="col">
-                    @Html.TextBoxFor(u=>u.Id,
-                   new { @class = "form-control", placeholder = "Id.", disabled = "disabled", autofocus = "autofocus" })
-                    @Html.ValidationMessageFor(u => u.Id, null, new { @class = "text-danger" })
-                </div>
+<section>
+    @using (Html.BeginForm("Update", "Urgencias", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group row">
+            @Html.LabelFor(u => u.Id, new { @class = "col-sm-4 col-form-label" })
+            <div class="col">
+                <input readonly name="Id" value="@u.Id" class="form-control"/>
             </div>
-            <div class="form-group row">
-                @Html.LabelFor(u => u.Nombre, new { @class = "col-sm-4 col-form-label" })
-                <div class="col">
-                    @Html.TextBoxFor(u => u.Nombre, new { @class = "form-control", disabled = "disabled", placeholder = "Nombre.", autofocus = "autofocus" })
-                    @Html.ValidationMessageFor(u => u.Nombre, null, new { @class = "text-danger" })
-                </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(u => u.Nombre, new { @class = "col-sm-4 col-form-label" })
+            <div class="col">
+                <input readonly name="Nombre" value="@u.Nombre" class="form-control" />
             </div>
-            <div class="form-group row">
-                @Html.LabelFor(u => u.Ap_paterno, new { @class = "col-sm-4 col-form-label" })
-                <div class="col">
-                    @Html.TextBoxFor(u => u.Ap_paterno,
-                   new { @class = "form-control", placeholder = "Apellido paterno.", disabled = "disabled", autofocus = "autofocus" })
-                    @Html.ValidationMessageFor(u => u.Ap_paterno, null, new { @class = "text-danger" })
-                </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(u => u.Ap_paterno, new { @class = "col-sm-4 col-form-label" })
+            <div class="col">
+                <input readonly name="Ap_paterno" value="@u.Ap_paterno" class="form-control" />
             </div>
-            <div class="form-group row">
-                @Html.LabelFor(u => u.Ap_materno, new { @class = "col-sm-4 col-form-label" })
-                <div class="col">
-                    @Html.TextBoxFor(u => u.Ap_materno,
-                  new { @class = "form-control", placeholder = "Apellido materno.", disabled = "disabled", autofocus = "autofocus" })
-                    @Html.ValidationMessageFor(u => u.Ap_materno, null, new { @class = "text-danger" })
-                </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(u => u.Ap_materno, new { @class = "col-sm-4 col-form-label" })
+            <div class="col">
+                <input readonly name="Ap_materno" value="@u.Ap_materno" class="form-control" />
             </div>
-            <div class="form-group row">
-                @Html.LabelFor(u => u.Telefono, new { @class = "col-sm-4 col-form-label" })
-                <div class="col">
-                    @Html.TextBoxFor(u => u.Telefono,
-                   new { @class = "form-control", type = "number", disabled = "disabled", placeholder = "0123456789" })
-                    @Html.ValidationMessageFor(u => u.Telefono, null, new { @class = "text-danger" })
-                </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(u => u.Telefono, new { @class = "col-sm-4 col-form-label" })
+            <div class="col">
+                <input readonly name="Telefono" value="@u.Telefono" class="form-control" />
             </div>
-            <div class="form-group row">
-                @Html.LabelFor(u => u.TelefonoF, new { @class = "col-sm-4 col-form-label" })
-                <div class="col">
-                    @Html.TextBoxFor(u => u.TelefonoF,
-                   new { @class = "form-control", type = "number", disabled = "disabled", placeholder = "0123456789" })
-                    @Html.ValidationMessageFor(u => u.TelefonoF, null, new { @class = "text-danger" })
-                </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(u => u.TelefonoF, new { @class = "col-sm-4 col-form-label" })
+            <div class="col">
+                <input readonly name="TelefonoF" value="@u.TelefonoF" class="form-control" />
             </div>
-            <div class="form-group row">
-                @Html.LabelFor(u => u.Email, new { @class = "col-sm-4 col-form-label" })
-                <div class="col">
-                    @Html.TextBoxFor(u => u.Email,
-                   new { @class = "form-control", type = "text", disabled = "disabled", placeholder = "name@example.com" })
-                    @Html.ValidationMessageFor(u => u.Email, null, new { @class = "text-danger" })
-                </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(u => u.Email, new { @class = "col-sm-4 col-form-label" })
+            <div class="col">
+                <input readonly name="Email" value="@u.Email" class="form-control" />
             </div>
-            <div class="form-group row">
-                @Html.LabelFor(u => u.Fecha_nac, new { @class = "col-sm-4 col-form-label" })
-                <div class="col">
-                    @Html.TextBoxFor(u => u.Fecha_nac,
-                  new { @class = "form-control", type = "date", min = fechaMin, max = fechaMax, placeholder = "Fecha de nacimiento." })
-                    @Html.ValidationMessageFor(u => u.Fecha_nac, null, new { @class = "text-danger" })
-                </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(u => u.Fecha_nac, new { @class = "col-sm-4 col-form-label" })
+            <div class="col">
+                @Html.TextBoxFor(u => u.Fecha_nac,
+              new { @class = "form-control", type = "date", min = fechaMin, max = fechaMax, placeholder = "Fecha de nacimiento." })
+                @Html.ValidationMessageFor(u => u.Fecha_nac, null, new { @class = "text-danger" })
             </div>
-            <div class="form-group row">
-                @Html.LabelFor(u => u.Nss, new { @class = "col-sm-4 col-form-label" })
-                <div class="col">
-                    @Html.TextBoxFor(u=>u.Nss,
-                   new { @class = "form-control",type = "number", disabled = "disabled", placeholder = "123456789" })
-                    @Html.ValidationMessageFor(u => u.Nss, null, new { @class = "text-danger" })
-                </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(u => u.Nss, new { @class = "col-sm-4 col-form-label" })
+            <div class="col">
+                <input readonly name="Nss" value="@u.Nss" class="form-control" />
             </div>
-            <div class="form-group row">
-                @Html.LabelFor(u => u.IdArea, new { @class = "col-sm-4 col-form-label" })
-                <div class="col">
-                    <select id="IdArea" name="IdArea" class="form-control" required>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(u => u.IdArea, new { @class = "col-sm-4 col-form-label" })
+            <div class="col">
+                <select id="IdArea" name="IdArea" class="form-control" required>
+                    @if (areas != null)
+                    {
                         @foreach (AreaModel area in areas)
                         {
-                            <option >@area.Nombre</option>
+                            <option value="@area.Id">@area.Nombre</option>
                         }
-                    </select>
-                </div>
+                    }
+                    else
+                    {
+                        <option value="0">Error</option>
+                    }
+                </select>
             </div>
-            <div class="form-group row">
-                <label for="IdMedico" class="col-sm-4 col-form-label">Medico a cargo</label>
-                <div class="col">
-                    <select id="IdMedico" name="IdArea" class="form-control" required>
+        </div>
+        <div class="form-group row">
+            <label for="IdMedico" class="col-sm-4 col-form-label">Medico a cargo</label>
+            <div class="col">
+                <select id="IdMedico" name="IdArea" class="form-control" required>
+                    @if (empleados != null)
+                    {
                         @foreach (EmpleadoModel empleado in empleados)
                         {
                             <option value="@empleado.Id">@empleado.Nombre @empleado.Ap_paterno @empleado.Ap_materno</option>
                         }
-                    </select>
-                </div>
+                    }
+                    else
+                    {
+                        <option value="0">Error</option>
+                    }
+
+                </select>
             </div>
-            <div class="form-group row">
-                @Html.LabelFor(u => u.Descripcion, new { @class = "col-sm-4 col-form-label" })
-                <div class="col">
-                    @Html.TextAreaFor(u => u.Descripcion,
-                   new { @class = "form-control", disabled = "disabled", placeholder = "Descripcion-" })
-                    @Html.ValidationMessageFor(u => u.Descripcion, null, new { @class = "text-danger" })
-                </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(u => u.Descripcion, new { @class = "col-sm-4 col-form-label" })
+            <div class="col">
+                <input readonly name="Descripcion" value="@u.Descripcion" class="form-control" />
             </div>
-            <div class="row justify-content-md-center">
-                <div class="col col-2">
-                    <button class="btn btn-primary btn-lg">Asignar.</button>
-                </div>
+        </div>
+        <div class="row justify-content-md-center">
+            <div class="col col-2">
+                <button class="btn btn-primary btn-lg">Asignar.</button>
             </div>
-        }
-    </section>
+        </div>
+    }
+</section>
