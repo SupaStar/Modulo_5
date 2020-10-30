@@ -123,7 +123,6 @@ namespace Modulo_5.Controllers
         }
         public IActionResult ValidarUrgencia(int id)
         {
-            //TODO hacer que se envien los empleados al select
             CargarSesion();
             if (this.sesion != null)
             {

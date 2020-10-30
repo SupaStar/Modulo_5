@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Modulo_5.Models;
@@ -46,7 +47,6 @@ namespace Modulo_5.Controllers
         }
         public ActionResult Editar(int id)
         {
-            //TODO terminar formulario
             ViewBag.areas = _service.getAreas();
             ViewBag.empleados = _service.getEmpleados();
 
