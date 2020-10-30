@@ -164,12 +164,11 @@ namespace Modulo_5.Services
             string sqlInsert = "UPDATE urgencia SET nombre=@p1,ap_paterno=@p2,ap_materno=@p3,telefono=@p4,telefonoF=@p5," +
                 "email=@p6,fecha_nac=@p7,nss=@p8,descripcion=@p9,atendido=@p10,id_area=@p11, estado=0,id_area=@p12 " +
                 "where id=@p13";
-            //string sqlInsert2 = "insert into urgencias-empleado values (id_urgencia=@p13, id_empleado=@p14)";
+          
                
             MySqlCommand m = conn.CreateCommand();
-            //MySqlCommand m2 = conn.CreateCommand();
-           // m2.CommandText = sqlInsert2;
             m.CommandText = sqlInsert;
+            
             m.Parameters.AddWithValue("@p1", urgenciaItem.Nombre);
             m.Parameters.AddWithValue("@p2", urgenciaItem.Ap_paterno);
             m.Parameters.AddWithValue("@p3", urgenciaItem.Ap_materno);
@@ -183,10 +182,7 @@ namespace Modulo_5.Services
             m.Parameters.AddWithValue("@p11", urgenciaItem.Estado);
             m.Parameters.AddWithValue("@p12", urgenciaItem.IdArea);
             m.Parameters.AddWithValue("@p13", id);
-            //m2.Parameters.AddWithValue("@p13", id);
-            //m2.Parameters.AddWithValue("@p14", urgenciaItem.IdMedico);
-            //m2.ExecuteNonQuery();
-            m.ExecuteNonQuery();
+                     m.ExecuteNonQuery();
             conn.Close();
             return urgenciaItem;
         }

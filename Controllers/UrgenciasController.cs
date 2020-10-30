@@ -58,7 +58,8 @@ namespace Modulo_5.Controllers
             if (ModelState.IsValid)
             {
                 _service.UpdateUrgencia(u.Id,u);
-                return RedirectToAction("Index", "Home");
+                _service.validateUrgencia(u.Id,u.IdMedico);
+                return RedirectToAction("VistaUrgencias", "Admin");
             }
             ViewBag.areas = _service.getAreas();
             ViewBag.empleados = _service.getEmpleados();

@@ -91,9 +91,9 @@
             </div>
         </div>
         <div class="form-group row">
-            <label for="IdMedico" class="col-sm-4 col-form-label">Medico a cargo</label>
+            @Html.LabelFor(u => u.IdMedico, new { @class = "col-sm-4 col-form-label" })
             <div class="col">
-                <select id="IdMedico" name="IdArea" class="form-control" required>
+                <select id="IdMedico" name="IdMedico" class="form-control" required>
                     @if (empleados != null)
                     {
                         @foreach (EmpleadoModel empleado in empleados)
