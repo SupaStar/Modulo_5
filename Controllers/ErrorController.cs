@@ -12,7 +12,7 @@ namespace Modulo_5.Controllers
         public IActionResult Handle(int errorCode)
         {
             ViewBag.error = errorCode.ToString();
-            return View("~/Views/Shared/Error.cshtml");
+            return View("~/Views/Shared/ErrorO.cshtml");
         }
     }
 }
