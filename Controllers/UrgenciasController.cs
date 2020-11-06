@@ -9,6 +9,8 @@ namespace Modulo_5.Controllers
 {
     public class UrgenciasController : Controller
     {
+        //private static string url = "https://localhost:44381";
+        private static string url = "https://webappm5.azurewebsites.net";
         private ILogger _logger;
         private UrgenciasService _service;
         private CorreosModel correo;
@@ -34,7 +36,9 @@ namespace Modulo_5.Controllers
                 _service.AddUrgencia(u);
                 correo.Asunto = "Registro urgencia";
                 correo.Destinatario = u.Email;
-                correo.Contenido = "Hola " + u.Nombre + " Se notifica su registro en la fecha: " + u.Fecha_nac + "<br><a href='https://webappm5.azurewebsites.net/Urgencias/VerCitaPaciente/" + u.Token + "'>Ver Cita</a>";
+
+                correo.Contenido = "Hola " + u.Nombre + " Se notifica su registro en la fecha: " + u.Fecha_nac + "<br><a href='" + url + "/Urgencias/VerCitaPaciente/" + u.Token + "'>Ver Cita</a>";
+
                 correo.Enviar();
                 return RedirectToAction("Index", "Home");
             }
@@ -81,7 +85,7 @@ namespace Modulo_5.Controllers
             UrgenciaModel urgencia = _service.validateUrgencia(idU, idE);
             correo.Asunto = "Urgencia aceptada";
             correo.Destinatario = urgencia.Email;
-            correo.Contenido = "Hola " + urgencia.Nombre + " Se notifica que su urgencia fue aceptada, ver en el siguiente link:<a href='https://localhost:44381/Urgencias/VerCitaPaciente/" + urgencia.Token + "'>Ver Cita</a>";
+            correo.Contenido = "Hola " + urgencia.Nombre + " Se notifica que su urgencia fue aceptada, ver en el siguiente link:<a href='" + url + "/Urgencias/VerCitaPaciente/" + urgencia.Token + "'>Ver Cita</a>";
             correo.Enviar();
             return RedirectToAction("CerrarPestannia", "Admin");
         }
