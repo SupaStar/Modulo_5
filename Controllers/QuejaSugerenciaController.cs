@@ -12,6 +12,8 @@ namespace Modulo_5.Controllers
 {
     public class QuejaSugerenciaController : Controller
     {
+        //private static string url = "https://localhost:44381";
+        private static string url = "https://webappm5.azurewebsites.net";
         QuejaService _quejaServ;
         SugerenciaService _sugServ;
         private CorreosModel correo;
@@ -47,7 +49,7 @@ namespace Modulo_5.Controllers
                 {
                     correo.Asunto = "Registro de su Queja";
                     correo.Destinatario = queja.Email;
-                    correo.Contenido = "Gracias por su queja, puede consultarla en el siguiente link <a href='https://localhost:44381/QuejaSugerencia/VerQuejaUsuario/" + queja.Token + "'>Ver queja</a>";
+                    correo.Contenido = "Gracias por su queja, puede consultarla en el siguiente link <a href='"+url+"/QuejaSugerencia/VerQuejaUsuario/" + queja.Token + "'>Ver queja</a>";
                     correo.Enviar();
                     return RedirectToAction("Index", "Home");
                 }
@@ -64,7 +66,7 @@ namespace Modulo_5.Controllers
                 _sugServ.AddSugerencia(sugerencia);
                 correo.Asunto = "Registro de su Sugerencia";
                 correo.Destinatario = sugerencia.Email;
-                correo.Contenido = "Gracias por su sugerencia, puede consultarla en el siguiente link <a href='https://localhost:44381/QuejaSugerencia/VerSugerenciaUsuario/" + sugerencia.Token + "'>Ver sugerencia</a>";
+                correo.Contenido = "Gracias por su sugerencia, puede consultarla en el siguiente link <a href='"+ url + "/QuejaSugerencia/VerSugerenciaUsuario/" + sugerencia.Token + "'>Ver sugerencia</a>";
                 correo.Enviar();
                 return RedirectToAction("Index", "Home");
             }
@@ -75,7 +77,7 @@ namespace Modulo_5.Controllers
             SugerenciaModel sugerencia = _sugServ.validateSugerencia(idS, idE);
             correo.Asunto = "Sugerencia validada";
             correo.Destinatario = sugerencia.Email;
-            correo.Contenido = "Gracias por su sugerencia, esta ya fue procesada, puedes verla en el siguiente link <a href='https://localhost:44381/QuejaSugerencia/VerSugerenciaUsuario/" + sugerencia.Token + "'>Ver sugerencia</a>";
+            correo.Contenido = "Gracias por su sugerencia, esta ya fue procesada, puedes verla en el siguiente link <a href='"+ url + "/QuejaSugerencia/VerSugerenciaUsuario/" + sugerencia.Token + "'>Ver sugerencia</a>";
             correo.Enviar();
             return RedirectToAction("CerrarPestannia", "Admin");
         }
@@ -95,7 +97,7 @@ namespace Modulo_5.Controllers
             QuejaModel queja = _quejaServ.validateQueja(idQ, idE);
             correo.Asunto = "Queja validada";
             correo.Destinatario = queja.Email;
-            correo.Contenido = "Gracias por su queja, esta ya fue procesada, puedes verla en el siguiente link <a href='https://localhost:44381/QuejaSugerencia/VerQuejaUsuario/" + queja.Token + "'>Ver queja</a>";
+            correo.Contenido = "Gracias por su queja, esta ya fue procesada, puedes verla en el siguiente link <a href='" + url + "/QuejaSugerencia/VerQuejaUsuario/" + queja.Token + "'>Ver queja</a>";
             correo.Enviar();
             return RedirectToAction("CerrarPestannia", "Admin");
         }
