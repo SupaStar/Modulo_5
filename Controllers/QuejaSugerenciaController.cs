@@ -40,7 +40,8 @@ namespace Modulo_5.Controllers
         public ActionResult addQueja(QuejaModel queja)
         {
             if (ModelState.IsValid)
-            {
+            { 
+                //TODO Agregar campo FechaConsultaDeseada
                 mensaje = _quejaServ.AddQueja(queja);
                 if (mensaje.Estado)
                 {

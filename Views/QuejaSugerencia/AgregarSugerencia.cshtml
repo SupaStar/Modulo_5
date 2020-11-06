@@ -2,33 +2,95 @@
 
 @{
 }
-
-<section  id="seccionlogin" class="jumbotron">
+<link href="https://cdn.jsdelivr.net/npm/smartwizard@5/dist/css/smart_wizard_all.min.css" rel="stylesheet" type="text/css" />
+<section id="seccionlogin" class="jumbotron">
     <h1 class="display-4">Mandar una sugerencia</h1>
-    @using (Html.BeginForm("addSugerencia", "QuejaSugerencia", FormMethod.Post))
+    @using (Html.BeginForm("addSugerencia", "QuejaSugerencia", FormMethod.Post, new { id = "Formulario" }))
     {
         @Html.AntiForgeryToken()
-        <div class="form-group row">
-            @Html.LabelFor(x => x.Email, new { @class = "col-sm-4 col-form-label" })
-            <div class="col">
-                @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "name@example.com", autofocus = "autofocus" })
-                @Html.ValidationMessageFor(x => x.Email, null, new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group row">
-            @Html.LabelFor(x => x.Descripcion, new { @class = "col-sm-4 col-form-label" })
-            <div class="col">
-                @Html.TextAreaFor(x => x.Descripcion, new { @class = "form-control", rows = "5" })
-                @Html.ValidationMessageFor(x => x.Descripcion, null, new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col">
-                <button type="submit" class="btn btn-success btn-block">Confirmar</button>
-            </div>
-            <div class="col">
-                <button type="reset" class="btn btn-danger btn-block">Cancelar</button>
+        <div id="smartwizard">
+            <ul class="nav">
+                <li>
+                    <a class="nav-link" href="#step-1">
+                        Datos de contacto
+                    </a>
+                </li>
+                <li>
+                    <a class="nav-link" href="#step-2">
+                        Informacion de la queja
+                    </a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div id="step-1" class="tab-pane" role="tabpanel">
+                    <div class="form-group row">
+                        @Html.LabelFor(x => x.Email, new { @class = "col-sm-4 col-form-label" })
+                        <div class="col">
+                            @Html.TextBoxFor(x => x.Email, new { @class = "form-control", placeholder = "name@example.com", autofocus = "autofocus" })
+                            @Html.ValidationMessageFor(x => x.Email, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div id="step-2" class="tab-pane" role="tabpanel">
+                    <div class="form-group row">
+                        @Html.LabelFor(x => x.Descripcion, new { @class = "col-sm-4 col-form-label" })
+                        <div class="col">
+                            @Html.TextAreaFor(x => x.Descripcion, new { @class = "form-control", rows = "5" })
+                            @Html.ValidationMessageFor(x => x.Descripcion, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     }
 </section>
+@section scripts{
+    <script src="https://cdn.jsdelivr.net/npm/smartwizard@5/dist/js/jquery.smartWizard.min.js" type="text/javascript"></script>
+    <script>
+        $(document).ready(function () {
+            var btnCancel = $('<button></button>').text('Cancelar')
+                .addClass('btn btn-danger')
+                .on('click', function () {
+                    document.getElementById("Formulario").reset();
+                    $('#smartwizard').smartWizard("reset");
+                });
+            var btnFinish = $('<button id="Enviar"></button>').text('Enviar')
+                .addClass('btn btn-info disabled')
+                .attr("disabled", true)
+                .on('click', function () { document.getElementById("Formulario").submit(); });
+
+            $("#smartwizard").on("showStep", function (e, anchorObject, stepNumber, stepDirection, stepPosition) {
+                if (stepPosition === 'last') {
+                    $('#Enviar').attr("disabled", false);
+                    $("#Enviar").removeClass('disabled');
+                } else {
+                    $('#Enviar').attr("disabled", true);
+                    $("#Enviar").addClass('disabled');
+                }
+            });
+
+            $('#smartwizard').smartWizard({
+                selected: 0,
+                justified: true,
+                backButtonSupport: true,
+                theme: 'dots',
+                toolbarSettings: {
+                    toolbarPosition: 'bottom',
+                    toolbarButtonPosition: 'right',
+                    showNextButton: true,
+                    showPreviousButton: true,
+                    toolbarExtraButtons: [btnCancel, btnFinish]
+                },
+                transition: {
+                    animation: 'fade', // Effect on navigation, none/fade/slide-horizontal/slide-vertical/slide-swing
+                    speed: '400',
+                    easing: ''
+                },
+                lang: {
+                    next: 'Siguiente',
+                    previous: 'Anterior'
+                },
+            });
+        });
+    </script>
+}
