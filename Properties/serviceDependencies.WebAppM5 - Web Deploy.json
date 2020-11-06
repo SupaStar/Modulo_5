@@ -4,6 +4,12 @@
       "type": "mssql",
       "suggestion": "true",
       "ignored": "true"
+    },
+    "mssql2": {
+      "type": "mssql",
+      "connectionId": "Default",
+      "suggestion": "true",
+      "ignored": "true"
     }
   }
 }
