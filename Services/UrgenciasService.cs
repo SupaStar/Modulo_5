@@ -57,7 +57,7 @@ namespace Modulo_5.Services
                 empleado.Ap_paterno = result[2].ToString();
                 empleado.Ap_materno = result[3].ToString();
                 empleado.Correo = result[4].ToString();
-                empleado.Num_cel = Convert.ToInt32(result[5].ToString());
+                empleado.Num_cel = result[5].ToString();
                 empleado.Num_cuenta = result[6].ToString();
                 empleados.Add(empleado);
             }
