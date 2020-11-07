@@ -36,9 +36,7 @@ namespace Modulo_5.Controllers
                 _service.AddUrgencia(u);
                 correo.Asunto = "Registro urgencia";
                 correo.Destinatario = u.Email;
-
                 correo.Contenido = "Hola " + u.Nombre + " Se notifica su registro en la fecha: " + u.Fecha_nac + "<br><a href='" + url + "/Urgencias/VerCitaPaciente/" + u.Token + "'>Ver Cita</a>";
-
                 correo.Enviar();
                 return RedirectToAction("Index", "Home");
             }
@@ -53,7 +51,6 @@ namespace Modulo_5.Controllers
         {
             ViewBag.areas = _service.getAreas();
             ViewBag.empleados = _service.getEmpleados();
-
             ViewBag.urgencia = _service.FindUrgencia(id);
             return View();
         }
@@ -63,7 +60,7 @@ namespace Modulo_5.Controllers
             {
                 _service.UpdateUrgencia(u.Id,u);
                 _service.validateUrgencia(u.Id,u.IdMedico);
-                return RedirectToAction("VistaUrgencias", "Admin");
+                return RedirectToAction("ValidarUrgencia", "Urgencias", new { idU = u.Id, idE = u.IdMedico });
             }
             ViewBag.areas = _service.getAreas();
             ViewBag.empleados = _service.getEmpleados();
