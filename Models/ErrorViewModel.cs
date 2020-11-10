@@ -1,5 +1,3 @@
-using System;
-
 namespace Modulo_5.Models
 {
     public class ErrorViewModel

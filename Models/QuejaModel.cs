@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Modulo_5.Models
 {
@@ -12,7 +8,7 @@ namespace Modulo_5.Models
         [Key]
         public int Id { get; set; }
 
-        [Required(ErrorMessage ="N° de la urgencia es requerido")]
+        [Required(ErrorMessage = "N° de la urgencia es requerido")]
         [Display(Name = "N° de la urgencia")]
         public int Id_urgencia { get; set; }
 
@@ -25,7 +21,7 @@ namespace Modulo_5.Models
         public int Id_tipo_queja { get; set; }
 
         [Required(ErrorMessage = "La descripcion es requerida.")]
-        [MinLength(25,ErrorMessage ="La longitud minima de la queja es de 25 caracteres.")]
+        [MinLength(25, ErrorMessage = "La longitud minima de la queja es de 25 caracteres.")]
         public string Descripcion { get; set; }
         public string Token { get; set; }
         public int Estado { get; set; }

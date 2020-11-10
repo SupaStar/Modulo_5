@@ -1,23 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Configuration;
 using Modulo_5.Models;
 using Modulo_5.Services;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Modulo_5.Controllers
 {
     public class QuejaSugerenciaController : Controller
     {
-        //private static string url = "https://localhost:44381";
-        private static string url = "https://webappm5.azurewebsites.net";
-        QuejaService _quejaServ;
-        SugerenciaService _sugServ;
-        private CorreosModel correo;
-        private MensajeModel mensaje = new MensajeModel();
+        private const string V = "https://webappm5.azurewebsites.net";
+
+#pragma warning disable S125 // Sections of code should not be commented out
+        //private static readonly string url = "https://localhost:44381";
+        private static readonly string url = V;
+#pragma warning restore S125 // Sections of code should not be commented out
+        readonly QuejaService _quejaServ;
+        readonly SugerenciaService _sugServ;
+        private readonly CorreosModel correo;
         public QuejaSugerenciaController(IConfiguration conf)
         {
             correo = new CorreosModel();
@@ -42,14 +43,14 @@ namespace Modulo_5.Controllers
         public ActionResult addQueja(QuejaModel queja)
         {
             if (ModelState.IsValid)
-            { 
+            {
                 //TODO Agregar campo FechaConsultaDeseada
-                mensaje = _quejaServ.AddQueja(queja);
+                MensajeModel mensaje = _quejaServ.AddQueja(queja);
                 if (mensaje.Estado)
                 {
                     correo.Asunto = "Registro de su Queja";
                     correo.Destinatario = queja.Email;
-                    correo.Contenido = "Gracias por su queja, puede consultarla en el siguiente link <a href='"+url+"/QuejaSugerencia/VerQuejaUsuario/" + queja.Token + "'>Ver queja</a>";
+                    correo.Contenido = "Gracias por su queja, puede consultarla en el siguiente link <a href='" + url + "/QuejaSugerencia/VerQuejaUsuario/" + queja.Token + "'>Ver queja</a>";
                     correo.Enviar();
                     return RedirectToAction("Index", "Home");
                 }
@@ -66,7 +67,7 @@ namespace Modulo_5.Controllers
                 _sugServ.AddSugerencia(sugerencia);
                 correo.Asunto = "Registro de su Sugerencia";
                 correo.Destinatario = sugerencia.Email;
-                correo.Contenido = "Gracias por su sugerencia, puede consultarla en el siguiente link <a href='"+ url + "/QuejaSugerencia/VerSugerenciaUsuario/" + sugerencia.Token + "'>Ver sugerencia</a>";
+                correo.Contenido = "Gracias por su sugerencia, puede consultarla en el siguiente link <a href='" + url + "/QuejaSugerencia/VerSugerenciaUsuario/" + sugerencia.Token + "'>Ver sugerencia</a>";
                 correo.Enviar();
                 return RedirectToAction("Index", "Home");
             }
@@ -77,7 +78,7 @@ namespace Modulo_5.Controllers
             SugerenciaModel sugerencia = _sugServ.validateSugerencia(idS, idE);
             correo.Asunto = "Sugerencia validada";
             correo.Destinatario = sugerencia.Email;
-            correo.Contenido = "Gracias por su sugerencia, esta ya fue procesada, puedes verla en el siguiente link <a href='"+ url + "/QuejaSugerencia/VerSugerenciaUsuario/" + sugerencia.Token + "'>Ver sugerencia</a>";
+            correo.Contenido = "Gracias por su sugerencia, esta ya fue procesada, puedes verla en el siguiente link <a href='" + url + "/QuejaSugerencia/VerSugerenciaUsuario/" + sugerencia.Token + "'>Ver sugerencia</a>";
             correo.Enviar();
             return RedirectToAction("CerrarPestannia", "Admin");
         }

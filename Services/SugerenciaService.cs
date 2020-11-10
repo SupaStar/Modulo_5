@@ -5,23 +5,19 @@ using Modulo_5.Services.Interfaces;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Modulo_5.Services
 {
     public class SugerenciaService : ISugerencia
     {
-        private List<SugerenciaModel> _sugerenciasItems;
-        DbController conexion;
-        private readonly IConfiguration _confi;
-        Encriptador enc = new Encriptador();
+        private readonly List<SugerenciaModel> _sugerenciasItems;
+        readonly DbController conexion;
+        readonly Encriptador enc = new Encriptador();
         public SugerenciaService(IConfiguration conf)
         {
             _sugerenciasItems = new List<SugerenciaModel>();
-            _confi = conf;
             conexion = new DbController();
-            conexion.conectionString = _confi.GetValue<string>("ConnectionStrings:Default");
+            conexion.ConectionString = conf.GetValue<string>("ConnectionStrings:Default");
         }
 
         public SugerenciaModel AddSugerencia(SugerenciaModel sugerenciaItem)

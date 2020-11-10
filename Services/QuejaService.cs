@@ -10,21 +10,19 @@ namespace Modulo_5.Services
 {
     public class QuejaService : IQueja
     {
-        private List<QuejaModel> _quejasItems;
-        private List<TipoQueja> _tiposQuejas;
-        DbController conexion;
-        Encriptador enc = new Encriptador();
-        private readonly IConfiguration _confi;
-        private SugerenciaService _sugS;
-        private MensajeModel mensaje = new MensajeModel();
+        private readonly List<QuejaModel> _quejasItems;
+        private readonly List<TipoQueja> _tiposQuejas;
+        readonly DbController conexion;
+        readonly Encriptador enc = new Encriptador();
+        private readonly SugerenciaService _sugS;
+        private readonly MensajeModel mensaje = new MensajeModel();
         public QuejaService(IConfiguration conf)
         {
-            _confi = conf;
             _quejasItems = new List<QuejaModel>();
             _tiposQuejas = new List<TipoQueja>();
             conexion = new DbController();
-            _sugS = new SugerenciaService(this._confi);
-            conexion.conectionString = _confi.GetValue<string>("ConnectionStrings:Default");
+            _sugS = new SugerenciaService(conf);
+            conexion.ConectionString = conf.GetValue<string>("ConnectionStrings:Default");
         }
         public List<TipoQueja> cargarTipos()
         {

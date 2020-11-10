@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using Modulo_5.Models;
 using Modulo_5.Services;
 
@@ -9,15 +7,16 @@ namespace Modulo_5.Controllers
 {
     public class UrgenciasController : Controller
     {
+
+#pragma warning disable S125 // Sections of code should not be commented out
         //private static string url = "https://localhost:44381";
         private static string url = "https://webappm5.azurewebsites.net";
-        private ILogger _logger;
-        private UrgenciasService _service;
-        private CorreosModel correo;
-        public UrgenciasController(ILogger<UrgenciasController> logger, IConfiguration conf)
+#pragma warning restore S125 // Sections of code should not be commented out
+        private readonly UrgenciasService _service;
+        private readonly CorreosModel correo;
+        public UrgenciasController(IConfiguration conf)
         {
             correo = new CorreosModel();
-            _logger = logger;
             _service = new UrgenciasService(conf);
         }
 
@@ -58,8 +57,8 @@ namespace Modulo_5.Controllers
         {
             if (ModelState.IsValid)
             {
-                _service.UpdateUrgencia(u.Id,u);
-                _service.validateUrgencia(u.Id,u.IdMedico);
+                _service.UpdateUrgencia(u.Id, u);
+                _service.validateUrgencia(u.Id, u.IdMedico);
                 return RedirectToAction("ValidarUrgencia", "Urgencias", new { idU = u.Id, idE = u.IdMedico });
             }
             ViewBag.areas = _service.getAreas();

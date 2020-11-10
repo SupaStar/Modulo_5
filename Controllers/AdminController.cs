@@ -1,18 +1,17 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Modulo_5.Services;
-using Modulo_5.Models;
-using Newtonsoft.Json;
 using Microsoft.Extensions.Configuration;
+using Modulo_5.Models;
+using Modulo_5.Services;
 
 namespace Modulo_5.Controllers
 {
     public class AdminController : Controller
     {
-        SesionService _service;
-        private UrgenciasService _serviceUrg;
-        private SugerenciaService _serviceSug;
-        private QuejaService _serviceQue;
+        readonly SesionService _service;
+        private readonly UrgenciasService _serviceUrg;
+        private readonly SugerenciaService _serviceSug;
+        private readonly QuejaService _serviceQue;
         string sesion;
         public AdminController(IConfiguration conf)
         {

@@ -10,20 +10,18 @@ namespace Modulo_5.Services
 {
     public class UrgenciasService : IUrgencia
     {
-        private List<UrgenciaModel> _urgenciasItems;
-        private List<AreaModel> areas;
-        private List<EmpleadoModel> empleados;
-        DbController conexion;
-        private readonly IConfiguration _confi;
-        Encriptador enc = new Encriptador();
+        private readonly List<UrgenciaModel> _urgenciasItems;
+        private readonly List<AreaModel> areas;
+        private readonly List<EmpleadoModel> empleados;
+        readonly DbController conexion;
+        readonly Encriptador enc = new Encriptador();
         public UrgenciasService(IConfiguration conf)
         {
-            _confi = conf;
             _urgenciasItems = new List<UrgenciaModel>();
             areas = new List<AreaModel>();
             conexion = new DbController();
             empleados = new List<EmpleadoModel>();
-            conexion.conectionString = _confi.GetValue<string>("ConnectionStrings:Default");
+            conexion.ConectionString = conf.GetValue<string>("ConnectionStrings:Default");
         }
         public List<AreaModel> getAreas()
         {
@@ -164,11 +162,11 @@ namespace Modulo_5.Services
             string sqlInsert = "UPDATE urgencia SET nombre=@p1,ap_paterno=@p2,ap_materno=@p3,telefono=@p4,telefonoF=@p5," +
                 "email=@p6,fecha_nac=@p7,nss=@p8,descripcion=@p9,atendido=@p10,id_area=@p11, estado=0,id_area=@p12 " +
                 "where id=@p13";
-          
-               
+
+
             MySqlCommand m = conn.CreateCommand();
             m.CommandText = sqlInsert;
-            
+
             m.Parameters.AddWithValue("@p1", urgenciaItem.Nombre);
             m.Parameters.AddWithValue("@p2", urgenciaItem.Ap_paterno);
             m.Parameters.AddWithValue("@p3", urgenciaItem.Ap_materno);
@@ -182,7 +180,7 @@ namespace Modulo_5.Services
             m.Parameters.AddWithValue("@p11", urgenciaItem.Estado);
             m.Parameters.AddWithValue("@p12", urgenciaItem.IdArea);
             m.Parameters.AddWithValue("@p13", id);
-                     m.ExecuteNonQuery();
+            m.ExecuteNonQuery();
             conn.Close();
             return urgenciaItem;
         }
@@ -225,7 +223,6 @@ namespace Modulo_5.Services
             m.Parameters.AddWithValue("@p1", idU);
             m.Parameters.AddWithValue("@p2", idE);
             m.ExecuteNonQuery();
-            Boolean estado = true;
             this.DeleteUrgencia(idU);
             UrgenciaModel urgencia = this.FindUrgencia(idU);
             return urgencia;

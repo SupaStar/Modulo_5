@@ -1,23 +1,21 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Modulo_5.Controllers;
 using Modulo_5.Models;
 using Modulo_5.Services.Interfaces;
 using MySql.Data.MySqlClient;
 using System;
 using System.Security.Cryptography;
-using System.Text;
 
 namespace Modulo_5.Services
 {
     public class SesionService : IUsuario
     {
-        DbController conexion;
-        Encriptador encri = new Encriptador();
+        readonly DbController conexion;
+        readonly Encriptador encri = new Encriptador();
         public SesionService(IConfiguration conf)
         {
             this.conexion = new DbController();
-            conexion.conectionString = conf.GetValue<string>("ConnectionStrings:Default");
+            conexion.ConectionString = conf.GetValue<string>("ConnectionStrings:Default");
         }
 
         public bool IniciarSesion(UsuarioModel usuario)

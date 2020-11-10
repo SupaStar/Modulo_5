@@ -2,19 +2,17 @@
 using MimeKit;
 using MimeKit.Text;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Modulo_5.Models
 {
     public class CorreosModel
     {
-        public string Contenido;
-        public string Destinatario;
-        public string Asunto;
-        private static string Correo= "pruebasmodulo5cetis@gmail.com";
-        private static string Password= "Ulisestortuga1";
+        public string Destinatario { get; set; }
+        public string Asunto { get; set; }
+        public string Contenido { get; set; }
+
+        private static string Correo = "pruebasmodulo5cetis@gmail.com";
+        private static readonly string Password = "Ulisestortuga1";
         public void Enviar()
         {
             try
@@ -35,9 +33,9 @@ namespace Modulo_5.Models
                     emailClient.Disconnect(true);
                 }
             }
-            catch
+            catch (Exception ex)
             {
-
+                Console.WriteLine("Error: {0}", ex);
             }
         }
     }

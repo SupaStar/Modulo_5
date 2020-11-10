@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Modulo_5.Models
 {
@@ -18,7 +14,6 @@ namespace Modulo_5.Models
         [Required(ErrorMessage = "El campo es requerido.")]
         [Display(Name = "Contraseña:")]
         public string Password { get; set; }
-
-        public string SessionK_Name = "_Id";
+        public string SessionK_Name { get; set; } = "_Id";
     }
 }
