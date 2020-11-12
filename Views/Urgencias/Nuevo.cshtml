@@ -63,7 +63,7 @@
                         @Html.LabelFor(x => x.Fecha_nac, new { @class = "col-sm-4 col-form-label" })
                         <div class="col">
                             @Html.TextBoxFor(x => x.Fecha_nac,
-                           new { @class = "form-control", type = "date", min = fechaMin, max = fechaMax, placeholder = "Fecha de nacimiento." })
+                           new { @class = "form-control", type = "date", placeholder = "Fecha de nacimiento." })
                             @Html.ValidationMessageFor(x => x.Fecha_nac, null, new { @class = "text-danger" })
                         </div>
                     </div>
@@ -101,6 +101,14 @@
                             @Html.TextBoxFor(x => x.Nss,
                            new { @class = "form-control", type = "number", placeholder = "123456789" })
                             @Html.ValidationMessageFor(x => x.Nss, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        @Html.LabelFor(x => x.FechaCita, new { @class = "col-sm-4 col-form-label" })
+                        <div class="col">
+                            @Html.TextBoxFor(x => x.FechaCita,
+                           new { @class = "form-control", type = "date", min = fechaMin, max = fechaMax, placeholder = "Fecha de nacimiento." })
+                            @Html.ValidationMessageFor(x => x.Fecha_nac, null, new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="form-group row">

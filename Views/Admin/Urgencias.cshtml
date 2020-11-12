@@ -27,7 +27,7 @@
                     <td>@urgencia.Id</td>
                     <td>@urgencia.Nombre @urgencia.Ap_paterno @urgencia.Ap_materno</td>
                     <td>@urgencia.Telefono</td>
-                    <td>@urgencia.Fecha_nac.ToShortDateString()</td>
+                    <td>@urgencia.FechaCita.ToShortDateString()</td>
                     <td>@urgencia.Nss</td>
                     <td>
                         <a target="_blank" asp-route-id="@urgencia.Id" asp-controller="Admin" asp-action="VistaEditarUrgencia" type="button" class="btn btn-secondary" aria-label="Editar">

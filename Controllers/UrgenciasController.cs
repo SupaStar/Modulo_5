@@ -35,7 +35,7 @@ namespace Modulo_5.Controllers
                 _service.AddUrgencia(u);
                 correo.Asunto = "Registro urgencia";
                 correo.Destinatario = u.Email;
-                correo.Contenido = "Hola " + u.Nombre + " Se notifica su registro en la fecha: " + u.Fecha_nac + "<br><a href='" + url + "/Urgencias/VerCitaPaciente/" + u.Token + "'>Ver Cita</a>";
+                correo.Contenido = "Hola " + u.Nombre + " Se notifica su registro en la fecha: " + u.FechaCita + "<br><a href='" + url + "/Urgencias/VerCitaPaciente/" + u.Token + "'>Ver Cita</a>";
                 correo.Enviar();
                 return RedirectToAction("Index", "Home");
             }

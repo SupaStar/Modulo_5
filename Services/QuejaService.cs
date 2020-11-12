@@ -14,14 +14,14 @@ namespace Modulo_5.Services
         private readonly List<TipoQueja> _tiposQuejas;
         readonly DbController conexion;
         readonly Encriptador enc = new Encriptador();
-        private readonly SugerenciaService _sugS;
+        private readonly UrgenciasService _urgenS;
         private readonly MensajeModel mensaje = new MensajeModel();
         public QuejaService(IConfiguration conf)
         {
             _quejasItems = new List<QuejaModel>();
             _tiposQuejas = new List<TipoQueja>();
             conexion = new DbController();
-            _sugS = new SugerenciaService(conf);
+            _urgenS = new UrgenciasService(conf);
             conexion.ConectionString = conf.GetValue<string>("ConnectionStrings:Default");
         }
         public List<TipoQueja> cargarTipos()
@@ -43,8 +43,8 @@ namespace Modulo_5.Services
         }
         public MensajeModel AddQueja(QuejaModel quejaItem)
         {
-            SugerenciaModel sugN = _sugS.FindSugerencia(quejaItem.Id_urgencia);
-            if (sugN.Id != 0)
+            UrgenciaModel quejN = _urgenS.FindUrgencia(quejaItem.Id_urgencia);
+            if (quejN.Id != 0)
             {
                 string paramHash = quejaItem.Email + quejaItem.Descripcion;
                 quejaItem.Token = enc.Hashing(paramHash);

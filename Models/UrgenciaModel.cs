@@ -35,6 +35,10 @@ namespace Modulo_5.Models
         [DataType(DataType.DateTime, ErrorMessage = "La fecha de nacimiento es requerida.")]
         [Display(Name = "Fecha de Nacimiento")]
         public DateTime Fecha_nac { get; set; }
+        [Required(ErrorMessage = "La fecha de cita es requerida.")]
+        [DataType(DataType.DateTime, ErrorMessage = "La fecha de cita es requerida.")]
+        [Display(Name = "Fecha de cita")]
+        public DateTime FechaCita { get; set; }
 
         [Required(ErrorMessage = "El numero de seguridad social es requerido.")]
         [Display(Name = "Numero de seguridad social")]
