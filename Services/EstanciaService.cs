@@ -40,7 +40,7 @@ namespace Modulo_5.Services
             }
             return estancia;
         }
-        public List<EstanciaModel> getEstancia()
+        public List<EstanciaModel> getEstancias()
         {
             List<EstanciaModel> estancias;
             using (var context = new DbEntityContext())
@@ -48,6 +48,44 @@ namespace Modulo_5.Services
                 estancias = context.estancias.ToList();
             }
             return estancias;
+        }
+        public List<OperacionModel> getOperaciones(int id_estanciaE)
+        {
+            List<OperacionModel> operaciones;
+            using (var context = new DbEntityContext())
+            {
+                operaciones = context.operaciones.Where(operacion => operacion.id_estancia == id_estanciaE).ToList();
+            }
+            return operaciones;
+        }
+        public List<UsuariosPacienteModel> getUsuarios(int id_estanciaE)
+        {
+            List<UsuariosPacienteModel> usuarios;
+            using (var context = new DbEntityContext())
+            {
+                usuarios = context.usuarios_paciente.Where(usuario => usuario.id_estancia == id_estanciaE).ToList();
+                //var query = from e in context.estancias
+                //            join es in context.usuarios_paciente on e.id equals es.id_estancia
+                //            select new
+                //            {
+                //                idE = e.id,
+                //                piso = e.piso,
+                //                cama = e.cama,
+                //                usuario = es.usuario,
+                //                password = es.password
+                //            };
+                //return new { estado = true, detalle = query.ToList() };
+            }
+            return usuarios;
+        }
+        public List<ObservacionModel> getObservaciones(int id_estanciaE)
+        {
+            List<ObservacionModel> observaciones;
+            using (var context = new DbEntityContext())
+            {
+                observaciones = context.observaciones.Where(observacion => observacion.id_estancia == id_estanciaE).ToList();
+            }
+            return observaciones;
         }
     }
 }
