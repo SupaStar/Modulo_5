@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Modulo_5.Models;
 using Modulo_5.Services;
+using Microsoft.EntityFrameworkCore;
 using Modulo_5.Services.Interfaces;
 using MySql.Data.MySqlClient;
 using System;
@@ -31,7 +33,6 @@ namespace Modulo_5
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
-
             services.AddControllersWithViews();
             services.AddTransient<MySqlConnection>(_ => new MySqlConnection(Configuration["ConnectionStrings:Default"]));
             services.AddSingleton<IUrgencia, UrgenciasService>();
