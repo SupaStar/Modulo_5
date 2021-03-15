@@ -9,7 +9,7 @@ namespace Modulo_5.Services
     public class OperacionService
     {
         MensajeModel mensaje = new MensajeModel();
-        public MensajeModel addOperacion(c operacion)
+        public MensajeModel addOperacion(OperacionModel operacion)
         {
             using (var context = new DbEntityContext())
             {

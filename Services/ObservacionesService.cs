@@ -9,11 +9,11 @@ namespace Modulo_5.Services
     public class ObservacionesService
     {
         MensajeModel mensaje = new MensajeModel();
-        public MensajeModel addOperacion(c operacion)
+        public MensajeModel addObservacion(ObservacionModel observacion)
         {
             using (var context = new DbEntityContext())
             {
-                context.operaciones.Add(operacion);
+                context.observaciones.Add(observacion);
                 context.SaveChanges();
             }
             mensaje.Estado = true;
