@@ -14,6 +14,7 @@ namespace Modulo_5.Controllers
 #pragma warning restore S125 // Sections of code should not be commented out
         private readonly UrgenciasService _service;
         private readonly CorreosModel correo;
+        private readonly PacienteService _pacienteS = new PacienteService();
         public UrgenciasController(IConfiguration conf)
         {
             correo = new CorreosModel();
@@ -79,11 +80,12 @@ namespace Modulo_5.Controllers
         public ActionResult ValidarUrgencia(int idU, int idE)
         {
             UrgenciaModel urgencia = _service.validateUrgencia(idU, idE);
-            correo.Asunto = "Urgencia aceptada";
-            correo.Destinatario = urgencia.Email;
-            correo.Contenido = "Hola " + urgencia.Nombre + " Se notifica que su urgencia fue aceptada, ver en el siguiente link:<a href='" + url + "/Urgencias/VerCitaPaciente/" + urgencia.Token + "'>Ver Cita</a>";
-            correo.Enviar();
-            return RedirectToAction("CerrarPestannia", "Admin");
+            //correo.Asunto = "Urgencia aceptada";
+            //correo.Destinatario = urgencia.Email;
+            //correo.Contenido = "Hola " + urgencia.Nombre + " Se notifica que su urgencia fue aceptada, ver en el siguiente link:<a href='" + url + "/Urgencias/VerCitaPaciente/" + urgencia.Token + "'>Ver Cita</a>";
+            //correo.Enviar();
+            PacienteModel paciente = _pacienteS.addPaciente(urgencia.Id);
+            return RedirectToAction("newEstancia", "Admin", new { id = paciente.id });
         }
     }
 }

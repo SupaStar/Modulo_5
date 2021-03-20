@@ -9,6 +9,7 @@ namespace Modulo_5.Services
     public class ObservacionesService
     {
         MensajeModel mensaje = new MensajeModel();
+        EstanciaService _estancia = new EstanciaService();
         public MensajeModel addObservacion(ObservacionModel observacion)
         {
             using (var context = new DbEntityContext())
@@ -47,6 +48,19 @@ namespace Modulo_5.Services
             using (var context = new DbEntityContext())
             {
                 observaciones = context.observaciones.ToList();
+            }
+            return observaciones;
+        }
+        public List<ObservacionModel> getObservacionesEstancia(int id)
+        {
+            List<ObservacionModel> observaciones;
+            using (var context = new DbEntityContext())
+            {
+                observaciones = context.observaciones.Where(observacion=>observacion.id_estancia==id).ToList();
+                foreach(ObservacionModel observacion in observaciones)
+                {
+                    observacion.estancia = _estancia.findEstancia(observacion.id_estancia);
+                }
             }
             return observaciones;
         }

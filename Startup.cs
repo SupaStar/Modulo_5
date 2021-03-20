@@ -79,6 +79,9 @@ namespace Modulo_5
                 endpoints.MapControllerRoute(
                     name: "quejaUsuario",
                     pattern: "{controller=QuejaSugerencia}/{action=VerQuejaUsuario}/{id}");
+                endpoints.MapControllerRoute(
+                    name: "quejaUsuario",
+                    pattern: "{controller=Observacion}/{action=Index}/{id}");
             });
         }
     }

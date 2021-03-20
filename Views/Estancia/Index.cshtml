@@ -1,0 +1,52 @@
+﻿s@{
+    Layout = "~/Views/Shared/Admin/_Layout.cshtml";
+    PacienteModel paciente = ViewBag.paciente;
+}
+@model EstanciaModel
+<section class="jumbotron">
+    <h1 class="display-4">Asignacion de piso y cama para el paciente</h1>
+    @using (Html.BeginForm("Create", "Estancia", FormMethod.Post))
+    {
+        <div class="form-group row">
+            @Html.LabelFor(x => x.piso, new { @class = "col-sm-4 col-form-label" })
+            <div class="col">
+                <select id="piso" name="piso" class="form-control" required>
+                   <option value="1">1</option>
+                   <option value="2">2</option>
+                   <option value="3">3</option>
+                   <option value="4">4</option>
+                   <option value="5">5</option>
+                </select>
+            </div>
+        </div>
+        <input value="@paciente.id" name="id_paciente" aria-label="id_paciente" hidden/>
+        <div class="form-group row">
+            @Html.LabelFor(x => x.cama, new { @class = "col-sm-4 col-form-label" })
+            <div class="col">
+                <select id="cama" name="cama" class="form-control" required>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                </select>
+            </div>
+        </div>
+        <button class="btn">Enviar</button>
+    }
+</section>

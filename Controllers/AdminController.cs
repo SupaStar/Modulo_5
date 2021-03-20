@@ -12,6 +12,8 @@ namespace Modulo_5.Controllers
         private readonly UrgenciasService _serviceUrg;
         private readonly SugerenciaService _serviceSug;
         private readonly QuejaService _serviceQue;
+        private readonly PacienteService _pacientes = new PacienteService();
+        private readonly EstanciaService _estancias = new EstanciaService();
         string sesion;
         public AdminController(IConfiguration conf)
         {
@@ -132,6 +134,34 @@ namespace Modulo_5.Controllers
         public IActionResult CerrarPestannia()
         {
             return View("Cerrar");
+        }
+        public IActionResult newEstancia(int id)
+        {
+            CargarSesion();
+            if (this.sesion != null)
+            {
+                return RedirectToAction("Index", "Estancia", new { idP = id });
+            }
+            return RedirectToAction("Login", "Admin");
+        }
+        public IActionResult Pacientes()
+        {
+            CargarSesion();
+            if (this.sesion != null)
+            {
+                ViewBag.estancias = _estancias.getEstancias();
+                return View();
+            }
+            return RedirectToAction("Login", "Admin");
+        }
+        public IActionResult Observaciones(int id)
+        {
+            CargarSesion();
+            if (this.sesion != null)
+            {
+                return RedirectToAction("Index", "Observacion",new { idE = id });
+            }
+            return RedirectToAction("Login", "Admin");
         }
     }
 }

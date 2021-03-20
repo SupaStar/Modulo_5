@@ -1,0 +1,59 @@
+﻿@{
+    Layout = "~/Views/Shared/Admin/_Layout.cshtml";
+    List<EstanciaModel> estancias = ViewBag.estancias;
+}
+<section id="seccionlogin">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+    <table class="table table-bordered" id="pacientes">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Fecha de entrada</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (estancias != null)
+            {
+                @foreach (EstanciaModel estancia in estancias)
+                {
+                    <tr>
+                        <td>@estancia.id</td>
+                        <td>@estancia.paciente.urgencia.Nombre @estancia.paciente.urgencia.Ap_paterno</td>
+                        <td>@Convert.ToDateTime(estancia.paciente.fecha_entrada).ToShortDateString()</td>
+                        <td>@estancia.paciente.urgencia.Descripcion</td>
+                        <td>
+                            <a target="_blank" asp-route-id="@estancia.id" asp-controller="Admin" asp-action="Observaciones" type="button" class="btn btn-secondary" aria-label="Ver">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</section>
+@section scripts{
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#pacientes').DataTable({
+                language: {
+                    "emptyTable": "No hay registros que atender",
+                    "search": "Buscar:",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "lengthMenu": "Mostrar _MENU_ registros",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+        });
+    </script>
+}

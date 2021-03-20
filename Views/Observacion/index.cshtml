@@ -1,0 +1,108 @@
+﻿@{
+    Layout = "~/Views/Shared/Admin/_Layout.cshtml";
+    List<ObservacionModel> observaciones = ViewBag.observaciones;
+    EstanciaModel estancia = ViewBag.estancia;
+}
+<section id="seccionlogin">
+    <button class="btn btn-info" type="button" data-toggle="modal" data-target="#nuevaO">Nueva observacion</button>
+    <h1>Paciente @estancia.paciente.urgencia.Nombre @estancia.paciente.urgencia.Ap_paterno</h1>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+    <table class="table table-bordered" id="observaciones">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Observaciones</th>
+                <th scope="col">Diagnostico</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (observaciones != null)
+            {
+                @foreach (ObservacionModel observacion in observaciones)
+                {
+                    <tr>
+                        <td>@observacion.id</td>
+                        <td>@observacion.diagnostico</td>
+                        <td>@observacion.observaciones</td>
+                        @*<td>
+                                <a target="_blank" asp-route-id="@estancia.id" asp-controller="Observaciones" asp-action="Index" type="button" class="btn btn-secondary" aria-label="Ver">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </td>*@
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</section>
+<div class="modal fade" id="nuevaO" tabindex="-1" aria-labelledby="nuevaO" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @model ObservacionModel
+            @using (Html.BeginForm("Create", "Observacion", FormMethod.Post))
+            {
+                <div class="modal-body">
+
+                    <div class="form-group row">
+                        @Html.LabelFor(x => x.diagnostico, new { @class = "col-sm-4 col-form-label" })
+                        <div class="col">
+                            @Html.TextAreaFor(x => x.diagnostico,
+                           new { @class = "form-control", type = "text", required = "required", placeholder = "Ingresa el diagnostico" })
+                            @Html.ValidationMessageFor(x => x.diagnostico, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        @Html.LabelFor(x => x.receta, new { @class = "col-sm-4 col-form-label" })
+                        <div class="col">
+                            @Html.TextAreaFor(x => x.receta,
+                           new { @class = "form-control", type = "text", required = "required", placeholder = "Receta brindada" })
+                            @Html.ValidationMessageFor(x => x.receta, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        @Html.LabelFor(x => x.observaciones, new { @class = "col-sm-4 col-form-label" })
+                        <div class="col">
+                            @Html.TextAreaFor(x => x.observaciones,
+                           new { @class = "form-control", type = "text", placeholder = "Observaciones varias" })
+                            @Html.ValidationMessageFor(x => x.observaciones, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <input name="id_estancia" value="@estancia.id" hidden aria-label="estanciaId" />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Save changes</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#observaciones').DataTable({
+                language: {
+                    "emptyTable": "No hay registros que atender",
+                    "search": "Buscar:",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "lengthMenu": "Mostrar _MENU_ registros",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+        });
+    </script>
+}

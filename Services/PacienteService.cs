@@ -15,18 +15,17 @@ namespace Modulo_5.Services
         public PacienteService()
         {
         }
-        public MensajeModel addPaciente(int id_urgencia)
+        public PacienteModel addPaciente(int id_urgencia)
         {
             PacienteModel paciente = new PacienteModel();
             paciente.id_urgencia = id_urgencia;
-            paciente.fecha_entrada = DateTime.Now.ToShortDateString();
+            paciente.fecha_entrada = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             using (var context = new DbEntityContext())
             {
                 context.pacientes.Add(paciente);
                 context.SaveChanges();
             }
-            mensaje.Estado = true;
-            return mensaje;
+            return paciente;
         }
         public PacienteModel findPaciente(int id_paciente)
         {
@@ -34,6 +33,7 @@ namespace Modulo_5.Services
             using (var context = new DbEntityContext())
             {
                 paciente = context.pacientes.Where(paciente => paciente.id == id_paciente).Single();
+                paciente.urgencia = context.urgencias.Find(paciente.id_urgencia);
             }
             return paciente;
         }
@@ -55,6 +55,10 @@ namespace Modulo_5.Services
             using (var context = new DbEntityContext())
             {
                 pacientes = context.pacientes.ToList();
+                foreach(PacienteModel paciente in pacientes)
+                {
+                    paciente.urgencia = context.urgencias.Find(paciente.id_urgencia);
+                }
             }
             return pacientes;
         }

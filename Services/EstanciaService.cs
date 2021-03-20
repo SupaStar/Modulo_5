@@ -9,15 +9,15 @@ namespace Modulo_5.Services
     public class EstanciaService
     {
         MensajeModel mensaje = new MensajeModel();
-        public MensajeModel addEstancia(EstanciaModel estancia)
+        PacienteService _paciente = new PacienteService();
+        public EstanciaModel addEstancia(EstanciaModel estancia)
         {
             using (var context = new DbEntityContext())
             {
                 context.estancias.Add(estancia);
                 context.SaveChanges();
             }
-            mensaje.Estado = true;
-            return mensaje;
+            return estancia;
         }
         public EstanciaModel findEstancia(int id_estancia)
         {
@@ -25,6 +25,7 @@ namespace Modulo_5.Services
             using (var context = new DbEntityContext())
             {
                 estancia = context.estancias.Where(estancia => estancia.id == id_estancia).Single();
+                estancia.paciente = _paciente.findPaciente(estancia.id_paciente);
             }
             return estancia;
         }
@@ -46,6 +47,10 @@ namespace Modulo_5.Services
             using (var context = new DbEntityContext())
             {
                 estancias = context.estancias.ToList();
+                foreach(EstanciaModel estancia in estancias)
+                {
+                    estancia.paciente = _paciente.findPaciente(estancia.id_paciente);
+                }
             }
             return estancias;
         }

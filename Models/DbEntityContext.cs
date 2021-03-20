@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Modulo_5.Models
 {
-    public class DbEntityContext: DbContext
+    public class DbEntityContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -20,7 +20,7 @@ namespace Modulo_5.Models
             modelBuilder.Entity<QuejaModel>().ToTable("queja");
             modelBuilder.Entity<SugerenciaModel>().ToTable("sugerencia");
             modelBuilder.Entity<TipoQueja>().ToTable("tipo_queja");
-            modelBuilder.Entity<UrgenciaModel>().ToTable("urgencia");
+            modelBuilder.Entity<UrgenciaModelE>().ToTable("urgencia");
             modelBuilder.Entity<UsuarioModel>().ToTable("login");
             modelBuilder.Entity<EstanciaModel>().ToTable("estancia");
             modelBuilder.Entity<SolucionQuejaModel>().ToTable("solucion_queja");
@@ -39,7 +39,7 @@ namespace Modulo_5.Models
         public DbSet<QuejaModel> quejas { get; set; }
         public DbSet<SugerenciaModel> sugerencias { get; set; }
         public DbSet<TipoQueja> tipos_quejas { get; set; }
-        public DbSet<UrgenciaModel> urgencias { get; set; }
+        public DbSet<UrgenciaModelE> urgencias { get; set; }
         public DbSet<UsuarioModel> usuarios { get; set; }
     }
 }

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Modulo_5.Models
 {
-    public class UrgenciaModel
+    public class UrgenciaModelE
     {
         [Key]
         public int Id { get; set; }
@@ -50,14 +50,11 @@ namespace Modulo_5.Models
 
         [Required(ErrorMessage = "El area es requerida.")]
         [Display(Name = "Area")]
-        public int? IdArea { get; set; }
         public int id_area { get; set; }
         [Display(Name = "Medico a Cargo:")]
-        public int IdMedico { get; set; }
         public int Estado { get; set; }
         public int Atendido { get; set; }
         public string Token { get; set; }
-        public List<AreaModel> areas { get; set; }
         public PacienteModel paciente { get; set; }
     }
 }
