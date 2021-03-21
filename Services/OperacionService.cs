@@ -9,6 +9,7 @@ namespace Modulo_5.Services
     public class OperacionService
     {
         MensajeModel mensaje = new MensajeModel();
+        EstanciaService _estancia = new EstanciaService();
         public MensajeModel addOperacion(OperacionModel operacion)
         {
             using (var context = new DbEntityContext())
@@ -39,12 +40,16 @@ namespace Modulo_5.Services
             }
             return operacion;
         }
-        public List<OperacionModel> getOperaciones()
+        public List<OperacionModel> getOperaciones(int idE)
         {
             List<OperacionModel> operaciones;
             using (var context = new DbEntityContext())
             {
-                operaciones = context.operaciones.ToList();
+                operaciones = context.operaciones.Where(a=>a.id_estancia==idE).ToList();
+                foreach(OperacionModel operacion in operaciones)
+                {
+                    operacion.estancia = _estancia.findEstancia(idE);
+                }
             }
             return operaciones;
         }

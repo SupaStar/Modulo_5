@@ -8,22 +8,22 @@ using Modulo_5.Models;
 
 namespace Modulo_5.Controllers
 {
-    public class ObservacionController : Controller
+    public class OperacionController : Controller
     {
-        private readonly ObservacionesService _observaciones = new ObservacionesService();
+        private readonly OperacionService _operaciones = new OperacionService();
         private readonly EstanciaService _estancia = new EstanciaService();
         public IActionResult Index(int idE)
         {
-            ViewBag.observaciones = _observaciones.getObservacionesEstancia(idE);
+            ViewBag.operaciones = _operaciones.getOperaciones(idE);
             ViewBag.estancia = _estancia.findEstancia(idE);
             return View();
         }
-        public IActionResult Create(ObservacionModel observacion)
+        public IActionResult Create(OperacionModel op)
         {
             if (ModelState.IsValid)
             {
-                _observaciones.addObservacion(observacion);
-                return RedirectToAction("Observaciones", "Admin", new { id = observacion.id_estancia });
+                _operaciones.addOperacion(op);
+                return RedirectToAction("Operaciones", "Admin", new { id = op.id_estancia });
             }
             return View("Index");
         }

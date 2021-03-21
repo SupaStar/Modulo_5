@@ -1,0 +1,100 @@
+﻿@{
+    Layout = "~/Views/Shared/Admin/_Layout.cshtml";
+    List<OperacionModel> operaciones = ViewBag.operaciones;
+    EstanciaModel estancia = ViewBag.estancia;
+}
+<section id="seccionlogin">
+    <button class="btn btn-info" type="button" data-toggle="modal" data-target="#nuevaO">Nueva observacion</button>
+    <h1>Paciente @estancia.paciente.urgencia.Nombre @estancia.paciente.urgencia.Ap_paterno</h1>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+    <table class="table table-bordered" id="operaciones">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Fecha de entrada</th>
+                <th scope="col">Fecha de salida esperada</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (operaciones != null)
+            {
+                @foreach (OperacionModel operacion in operaciones)
+                {
+                    <tr>
+                        <td>@operacion.id</td>
+                        <td>@Convert.ToDateTime(operacion.fecha_entrada).ToShortDateString()</td>
+                        <td>@Convert.ToDateTime(operacion.fecha_salida).ToShortDateString()</td>
+                        @*<td>
+                                <a target="_blank" asp-route-id="@estancia.id" asp-controller="Observaciones" asp-action="Index" type="button" class="btn btn-secondary" aria-label="Ver">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </td>*@
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</section>
+<div class="modal fade" id="nuevaO" tabindex="-1" aria-labelledby="nuevaO" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @model OperacionModel
+            @using (Html.BeginForm("Create", "Operacion", FormMethod.Post))
+            {
+                <div class="modal-body">
+
+                    <div class="form-group row">
+                        @Html.LabelFor(x => x.fecha_entrada, new { @class = "col-sm-4 col-form-label" })
+                        <div class="col">
+                            @Html.TextBoxFor(x => x.fecha_entrada,
+                           new { @class = "form-control", type = "date", required = "required", placeholder = "Fecha de entrada" })
+                            @Html.ValidationMessageFor(x => x.fecha_entrada, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        @Html.LabelFor(x => x.fecha_salida, new { @class = "col-sm-4 col-form-label" })
+                        <div class="col">
+                            @Html.TextBoxFor(x => x.fecha_salida,
+                           new { @class = "form-control", type = "date", required = "required", placeholder = "Fecha estimada de salida" })
+                            @Html.ValidationMessageFor(x => x.fecha_salida, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <input name="id_estancia" value="@estancia.id" hidden aria-label="estanciaId" />
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary">Save changes</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#operaciones').DataTable({
+                language: {
+                    "emptyTable": "No hay registros que atender",
+                    "search": "Buscar:",
+                    "info": "Mostrando _START_ a _END_ de _TOTAL_ registros",
+                    "zeroRecords": "Sin resultados encontrados",
+                    "lengthMenu": "Mostrar _MENU_ registros",
+                    "paginate": {
+                        "first": "Primero",
+                        "last": "Ultimo",
+                        "next": "Siguiente",
+                        "previous": "Anterior"
+                    }
+                }
+            });
+        });
+    </script>
+}

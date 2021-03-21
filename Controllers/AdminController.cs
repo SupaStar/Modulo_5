@@ -159,7 +159,16 @@ namespace Modulo_5.Controllers
             CargarSesion();
             if (this.sesion != null)
             {
-                return RedirectToAction("Index", "Observacion",new { idE = id });
+                return RedirectToAction("Index", "Observacion", new { idE = id });
+            }
+            return RedirectToAction("Login", "Admin");
+        }
+        public IActionResult Operaciones(int id)
+        {
+            CargarSesion();
+            if (this.sesion != null)
+            {
+                return RedirectToAction("Index", "Operacion", new { idE = id });
             }
             return RedirectToAction("Login", "Admin");
         }
