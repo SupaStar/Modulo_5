@@ -5,9 +5,11 @@
     Layout = "~/Views/Shared/Admin/_Layout.cshtml";
     List<UrgenciaModel> urgencias = ViewBag.urgencias;
 }
-<section  id="seccionlogin">
+<section  id="seccionlogin" style="padding-right: 20px;
+        padding-left: 20px;
+">
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
-<table class="table table-bordered" id="urgencias">
+<table class="table-light table-bordered table-striped table-hover" style="width:100%" id="urgencias">
     <thead class="thead-dark">
         <tr>
             <th scope="col">ID</th>
@@ -48,6 +50,7 @@
     <script>
         $(document).ready(function () {
             $('#urgencias').DataTable({
+                responsive: true,
                 language: {
                     "emptyTable": "No hay registros que atender",
                     "search": "Buscar:",
