@@ -11,13 +11,14 @@ namespace Modulo_5.Models
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseMySQL("server=127.0.0.1;user=root;password=;database=hospital");
+            //optionsBuilder.UseMySQL("Server=127.0.0.1;Port=50980;Database=localdb;Uid=azure;Pwd=6#vWHD_$;");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AreaModel>().ToTable("area");
             modelBuilder.Entity<EmpleadoModel>().ToTable("empleado");
             modelBuilder.Entity<PacienteModel>().ToTable("paciente");
-            modelBuilder.Entity<QuejaModel>().ToTable("queja");
+            modelBuilder.Entity<QuejaModelE>().ToTable("queja");
             modelBuilder.Entity<SugerenciaModel>().ToTable("sugerencia");
             modelBuilder.Entity<TipoQueja>().ToTable("tipo_queja");
             modelBuilder.Entity<UrgenciaModelE>().ToTable("urgencia");
@@ -36,7 +37,7 @@ namespace Modulo_5.Models
         public DbSet<UsuariosPacienteModel> usuarios_paciente { get; set; }
         public DbSet<SolucionQuejaModel> soluciones { get; set; }
         public DbSet<EstanciaModel> estancias { get; set; }
-        public DbSet<QuejaModel> quejas { get; set; }
+        public DbSet<QuejaModelE> quejas { get; set; }
         public DbSet<SugerenciaModel> sugerencias { get; set; }
         public DbSet<TipoQueja> tipos_quejas { get; set; }
         public DbSet<UrgenciaModelE> urgencias { get; set; }

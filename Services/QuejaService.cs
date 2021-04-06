@@ -151,6 +151,27 @@ namespace Modulo_5.Services
             }
             return queja;
         }
+        public QuejaModelE FindQuejaByTokenE(string token)
+        {
+            MySqlConnection conn = conexion.conectar();
+            string sql = "SELECT * FROM queja WHERE token=@p1";
+            MySqlCommand m = conn.CreateCommand();
+            m.CommandText = sql;
+            m.Parameters.AddWithValue("@p1", token);
+            MySqlDataReader result = m.ExecuteReader();
+            QuejaModelE queja = new QuejaModelE();
+            while (result.Read())
+            {
+                queja.Id = Convert.ToInt32(result[0].ToString());
+                queja.Id_urgencia = Convert.ToInt32(result[1].ToString());
+                queja.Email = result[2].ToString();
+                queja.Id_tipo_queja = Convert.ToInt32(result[3].ToString());
+                queja.Descripcion = result[4].ToString();
+                queja.Token = result[5].ToString();
+                queja.Estado = Convert.ToInt32(result[6].ToString());
+            }
+            return queja;
+        }
         public QuejaModel validateQueja(int idQ, int idE)
         {
             MySqlConnection conn = conexion.conectar();

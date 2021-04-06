@@ -7,7 +7,7 @@
     Layout = "~/Views/Shared/Admin/_Layout.cshtml";
     string estado = queja.Estado == 1 ? "No validada" : "Validada";
 }
-<section  id="seccionlogin" class="jumbotron container-fluid">
+<section id="seccionlogin" class="jumbotron container-fluid">
     <div class="form-group row">
         <label class="col-sm-4 col-form-label" for="Id">@Html.DisplayNameFor(model => queja.Id)</label>
         <div class="col">
@@ -38,5 +38,15 @@
             <input readonly id="Estado" class="form-control" value="@estado" />
         </div>
     </div>
-    <a class="btn btn-success" asp-route-id="@queja.Id" asp-controller="Admin" asp-action="ValidarQueja">Validar Queja</a>
+    @model SolucionQuejaModel
+    <form action="/Admin/ValidarQueja/@queja.Id" method="post">
+        <div class="form-group row">
+            @Html.LabelFor(x => x.solucion, new { @class = "col-sm-4 col-form-label" })
+            <div class="col">
+                @Html.TextAreaFor(x => x.solucion, new { @class = "form-control", placeholder = "Solucion a la queja.", autofocus = "autofocus" })
+                @Html.ValidationMessageFor(x => x.solucion, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <button class="btn btn-success">Validar Queja</button>
+    </form>
 </section>

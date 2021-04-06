@@ -13,11 +13,12 @@ namespace Modulo_5.Controllers
         private const string V = "https://webappm5.azurewebsites.net";
 
 #pragma warning disable S125 // Sections of code should not be commented out
-        //private static readonly string url = "https://localhost:44381";
+        //private static readonly string V = "https://localhost:44381";
         private static readonly string url = V;
 #pragma warning restore S125 // Sections of code should not be commented out
         readonly QuejaService _quejaServ;
         readonly SugerenciaService _sugServ;
+        readonly SolucionQuejaService _solucion=new SolucionQuejaService();
         private readonly CorreosModel correo;
         public QuejaSugerenciaController(IConfiguration conf)
         {
@@ -109,7 +110,9 @@ namespace Modulo_5.Controllers
         }
         public ActionResult VerQuejaUsuario(string id)
         {
-            ViewBag.queja = _quejaServ.FindQuejaByToken(id);
+            QuejaModelE queja = _quejaServ.FindQuejaByTokenE(id);
+            queja.solucion = _solucion.getSolucionbyIdQueja(queja.Id);
+            ViewBag.queja = queja;
             return View("Usuario/VerQueja");
         }
     }

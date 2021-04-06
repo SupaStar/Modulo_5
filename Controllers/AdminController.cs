@@ -14,6 +14,7 @@ namespace Modulo_5.Controllers
         private readonly QuejaService _serviceQue;
         private readonly PacienteService _pacientes = new PacienteService();
         private readonly EstanciaService _estancias = new EstanciaService();
+        private readonly SolucionQuejaService _solucion = new SolucionQuejaService();
         string sesion;
         public AdminController(IConfiguration conf)
         {
@@ -113,11 +114,15 @@ namespace Modulo_5.Controllers
             }
             return RedirectToAction("Login", "Admin");
         }
-        public IActionResult ValidarQueja(int id)
+        public IActionResult ValidarQueja(IFormCollection solucion, int id)
         {
             CargarSesion();
             if (this.sesion != null)
             {
+                SolucionQuejaModel solucioncita = new SolucionQuejaModel();
+                solucioncita.id_queja = id;
+                solucioncita.solucion = solucion["solucion"];
+                _solucion.addSolucion(solucioncita);
                 return RedirectToAction("ValidarQueja", "QuejaSugerencia", new { idQ = id, idE = sesion });
             }
             return RedirectToAction("Login", "Admin");

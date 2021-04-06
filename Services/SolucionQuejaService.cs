@@ -24,7 +24,7 @@ namespace Modulo_5.Services
             SolucionQuejaModel solucion;
             using (var context = new DbEntityContext())
             {
-                solucion = context.soluciones.Where(solucion => solucion.id == id_solucion).Single();
+                solucion = context.soluciones.Where(solucion => solucion.id == id_solucion).SingleOrDefault();
             }
             return solucion;
         }
@@ -47,6 +47,15 @@ namespace Modulo_5.Services
                 soluciones = context.soluciones.ToList();
             }
             return soluciones;
+        }
+        public SolucionQuejaModel getSolucionbyIdQueja(int idQ)
+        {
+            SolucionQuejaModel solucion;
+            using (var context = new DbEntityContext())
+            {
+                solucion = context.soluciones.Where(solucion => solucion.id_queja == idQ).SingleOrDefault();
+            }
+            return solucion;
         }
     }
 }
