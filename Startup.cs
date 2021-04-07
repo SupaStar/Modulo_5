@@ -71,6 +71,9 @@ namespace Modulo_5
                     name: "administrador",
                     pattern: "{controller=Admin}/{action=Login}");
                 endpoints.MapControllerRoute(
+                    name: "usuario",
+                    pattern: "{controller=Usuario}/{action=Login}");
+                endpoints.MapControllerRoute(
                     name: "citaUsuario",
                     pattern: "{controller=Urgencias}/{action=VerCitaPaciente}/{id}");
                 endpoints.MapControllerRoute(
