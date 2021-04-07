@@ -48,8 +48,8 @@ namespace Modulo_5.Models
         [Display(Name = "Descripcion de los malestares:")]
         public string Descripcion { get; set; }
 
-        [Required(ErrorMessage = "El area es requerida.")]
-        [Display(Name = "Area")]
+        [Required(ErrorMessage = "El tipo es requerido.")]
+        [Display(Name = "Tipo de urgencia")]
         public int? IdArea { get; set; }
         public int id_area { get; set; }
         [Display(Name = "Medico a Cargo:")]
