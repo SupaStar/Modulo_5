@@ -7,14 +7,15 @@ namespace Modulo_5.Controllers
 {
     public class HomeController : Controller
     {
-
+        public Rot13 encriptar = new Rot13();
         public HomeController()
         {
         }
 
-        public IActionResult Index()
+        public void Index()
         {
-            return View();
+            encriptar.imprimir();
+            //return View();
         }
 
         public IActionResult Privacy()
