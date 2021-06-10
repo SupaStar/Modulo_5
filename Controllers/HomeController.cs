@@ -14,7 +14,9 @@ namespace Modulo_5.Controllers
 
         public void Index()
         {
-            encriptar.imprimir();
+            
+            encriptar.encriptar();
+
             //return View();
         }
 

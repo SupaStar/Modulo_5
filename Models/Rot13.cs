@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,8 +8,8 @@ namespace Modulo_5.Models
 {
     public class Rot13
     {
-        public char[] abecedarioM = { ' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '.' };
-        public char[] abecedario = new char[28];
+        public char[] abecedarioM = { ' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '.','0', '1', '2', '3', '4', '5','6', '7', '8', '9' };
+        public char[] abecedario = new char[38];
         public int[] numeros = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
         public Rot13()
         {
@@ -19,16 +20,85 @@ namespace Modulo_5.Models
                 loop++;
             }
         }
-        public void imprimir()
+        
+        public void encriptar()
         {
-            foreach (char letras in abecedarioM)
+            string phrase = "01234HolahOLA";
+            char[] caracteres = new char[phrase.Length];
+            foreach (char letra in phrase)
             {
-                Console.WriteLine(letras);
+                for (int i = 0; i < abecedario.Length; i++)
+                {
+                    if (letra == abecedarioM[i])
+                    {
+
+                        if (i == 0)
+                        {
+                            System.Diagnostics.Debug.WriteLine(abecedarioM[i + 27]);
+                           
+
+
+                        }
+                        else if (i == 27)
+                        {
+                            System.Diagnostics.Debug.WriteLine(abecedarioM[i - 27]);
+                           
+
+                        }
+                        else
+                        {
+                            if(i<=13)
+                            {
+                                System.Diagnostics.Debug.WriteLine(abecedarioM[i +13]);
+                               
+
+                            }
+                            else if(i<27)
+                            {
+                                System.Diagnostics.Debug.WriteLine(abecedarioM[i - 13]);
+                               
+                            }
+                            else
+                            {
+                                if(i>27 && i<=32)
+                                {
+                                    System.Diagnostics.Debug.WriteLine(abecedarioM[i +5]);
+                                }
+                                else if(i>32)
+                                {
+                                    System.Diagnostics.Debug.WriteLine(abecedarioM[i - 5]);
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (letra == abecedario[i])
+                        {
+
+
+                            if (i <= 13)
+                            {
+                                System.Diagnostics.Debug.WriteLine(abecedario[i + 13]);
+
+
+                            }
+                            else
+                            {
+                                System.Diagnostics.Debug.WriteLine(abecedario[i - 13]);
+
+                            }
+                        }
+                     
+                      
+                        }
+                    }
+                }
+            
+          
             }
-            foreach (char letras in abecedario)
-            {
-                Console.WriteLine(letras);
-            }
+          
+
         }
     }
-}
+
