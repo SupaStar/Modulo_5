@@ -23,7 +23,8 @@ namespace Modulo_5.Models
         
         public void encriptar()
         {
-            string phrase = "01234HolahOLA";
+            string phrase = "PePeproblemAs xDDDD 123489798";
+            string palabra = "";
             char[] caracteres = new char[phrase.Length];
             foreach (char letra in phrase)
             {
@@ -35,14 +36,12 @@ namespace Modulo_5.Models
                         if (i == 0)
                         {
                             System.Diagnostics.Debug.WriteLine(abecedarioM[i + 27]);
-                           
-
-
+                            palabra+=(abecedarioM[i + 27]);
                         }
                         else if (i == 27)
                         {
                             System.Diagnostics.Debug.WriteLine(abecedarioM[i - 27]);
-                           
+                            palabra+=(abecedarioM[i - 27]);
 
                         }
                         else
@@ -50,23 +49,25 @@ namespace Modulo_5.Models
                             if(i<=13)
                             {
                                 System.Diagnostics.Debug.WriteLine(abecedarioM[i +13]);
-                               
+                                palabra+=(abecedarioM[i + 13]);
 
                             }
                             else if(i<27)
                             {
                                 System.Diagnostics.Debug.WriteLine(abecedarioM[i - 13]);
-                               
+                                palabra+=(abecedarioM[i - 13]);
                             }
                             else
                             {
                                 if(i>27 && i<=32)
                                 {
                                     System.Diagnostics.Debug.WriteLine(abecedarioM[i +5]);
+                                    palabra+=(abecedarioM[i + 5]);
                                 }
                                 else if(i>32)
                                 {
                                     System.Diagnostics.Debug.WriteLine(abecedarioM[i - 5]);
+                                    palabra+=(abecedarioM[i - 5]);
                                 }
                             }
                         }
@@ -80,13 +81,13 @@ namespace Modulo_5.Models
                             if (i <= 13)
                             {
                                 System.Diagnostics.Debug.WriteLine(abecedario[i + 13]);
-
+                                palabra+=(abecedario[i + 13]);
 
                             }
                             else
                             {
                                 System.Diagnostics.Debug.WriteLine(abecedario[i - 13]);
-
+                                palabra+=(abecedario[i - 13]);
                             }
                         }
                      
@@ -94,7 +95,7 @@ namespace Modulo_5.Models
                         }
                     }
                 }
-            
+            Console.WriteLine(palabra);
           
             }
           
