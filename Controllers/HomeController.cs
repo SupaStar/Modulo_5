@@ -7,7 +7,7 @@ namespace Modulo_5.Controllers
 {
     public class HomeController : Controller
     {
-        public Rot13 encriptar = new Rot13();
+        public Encriptador encriptar = new Encriptador();
         public HomeController()
         {
         }
@@ -15,7 +15,9 @@ namespace Modulo_5.Controllers
         public void Index()
         {
             
-            encriptar.encriptar();
+            encriptar.crearLlave();
+            encriptar.Hashing("prueba pepe");
+            encriptar.DeHashing("fz7ia49fifi");
 
             //return View();
         }

@@ -23,7 +23,7 @@ namespace Modulo_5.Models
         
         public void encriptar()
         {
-            string phrase = "PePeproblemAs xDDDD 123489798";
+            string phrase = "El viernes 11 de Junio del 2021 el equipo 3 expone Rot13";
             string palabra = "";
             char[] caracteres = new char[phrase.Length];
             foreach (char letra in phrase)
